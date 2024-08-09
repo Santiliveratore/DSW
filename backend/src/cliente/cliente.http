@@ -1,0 +1,40 @@
+### obtener todos los clientes
+GET http://localhost:3000/api/clientes
+
+
+### obtener un cliente
+GET http://localhost:3000/api/clientes/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+
+### crear un nuevo cliente
+POST http://localhost:3000/api/clientes
+Content-Type: application/json
+
+{
+  "name": "Atila",
+  "apellido": "warrior",
+  "dni": 2222222,
+  "email": "aaaa@gmail.com"
+}
+
+### modificar un cliente (PUT - recurso completo e idempotente)
+PUT http://localhost:3000/api/clientes/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+Content-Type: application/json
+
+{
+  "name": "Julian",
+  "apellido": "Butti",
+  "dni": 33333,
+  "email":"bbbb@gmail.com"   
+}
+
+### modificar un cliente (PATCH - recurso parcial)
+PATCH http://localhost:3000/api/clientes/a02b91bc-3769-4221-beb1-d7a3aeba7dad
+Content-Type: application/json
+
+{
+  "name": "Juan",
+  "email":"juan@gmail.com"  
+}
+
+### borrar un cliente
+DELETE http://localhost:3000/api/clientes/a02b91bc-3769-4221-beb1-d7a3aeba7dad
