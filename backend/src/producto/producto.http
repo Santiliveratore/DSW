@@ -1,0 +1,2 @@
+### obtener todos los productos
+GET http://localhost:3000/api/productos

@@ -2,22 +2,27 @@ import { Entity,PrimaryKey,Property } from "@mikro-orm/core"
 
 
 @Entity()
-export class Cliente {
+export class Producto {
 
     @PrimaryKey()  
     id?:number
 
     @Property()
-    name!: string
+    nombre!: string
 
     @Property()
-    apellido!: string
+    descripcion!: string
 
     @Property()
-    dni!: number
+    precio!: number
 
     @Property()
-    email!:string
+    stock!: number
+
+    @Property()
+    id_categoria!:number
+
+    @Property()
+    foto?:string
     
-  
 }
