@@ -1,2 +1,43 @@
 ### obtener todos los productos
 GET http://localhost:3000/api/productos
+
+
+### obtener un producto
+
+ @id=2
+GET http://localhost:3000/api/productos/{{id}}
+
+
+### crear un nuevo producto
+
+POST http://localhost:3000/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Aceite Natura",
+  "descripcion": "Aceite de girasol 1L",
+  "precio": 1400,
+  "stock": 20,
+  "id_categoria":5
+  
+}
+
+### modificar un producto
+PUT http://localhost:3000/api/productos/{{id}}
+Content-Type: application/json
+
+{
+  "nombre": "Pepsi 2L",
+  "descripcion": "gaseosa sabor cola",
+  "precio": 1150,
+  "stock": 20,
+  "id_categoria":2
+  
+}
+
+### borrar un producto
+
+### cambiar el id que se quiere eliminar
+ @id_eliminar=7
+
+DELETE http://localhost:3000/api/productos/{{id_eliminar}}
