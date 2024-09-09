@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { findAll,findOne,add,update,remove } from './producto.controller.js'
+import { findAll,findOne,add,update,remove } from './tipo_producto.controller.js'
 
-export const productoRouter = Router()
+export const tipo_productoRouter = Router()
 
-productoRouter.get('/', findAll)
-productoRouter.get('/:id', findOne)
-productoRouter.post('/', add)
-productoRouter.put('/:id', update)
-productoRouter.delete('/:id', remove)
+tipo_productoRouter.get('/', findAll)
+tipo_productoRouter.get('/:id', findOne)
+tipo_productoRouter.post('/', add)
+tipo_productoRouter.put('/:id', update)
+tipo_productoRouter.delete('/:id', remove)
