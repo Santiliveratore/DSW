@@ -13,13 +13,13 @@ POST http://localhost:3000/api/tipo_productos
 Content-Type: application/json
 
 {
-  "id": "1",
+  "id": 1,
   "descripcion": "perecedero"
   
 }
 
 {
-  "id": "2",
+  "id": 2,
   "descripcion": "no-perecedero"
   
 }
