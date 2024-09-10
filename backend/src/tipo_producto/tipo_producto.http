@@ -1,37 +1,38 @@
 ### obtener todos los tipo_productos
-GET http://localhost:3000/api/tipo_productos
+GET http://localhost:3000/api/tipo_producto
 
 
 ### obtener un tipo_producto
 
-GET http://localhost:3000/api/tipo_productos/{{id}}
+@id=2
+
+GET http://localhost:3000/api/tipo_producto/{{id}}
 
 
 ### crear un nuevo tipo_producto
 
-POST http://localhost:3000/api/tipo_productos
+POST http://localhost:3000/api/tipo_producto
 Content-Type: application/json
 
 {
-  "id": 1,
-  "descripcion": "perecedero"
+  
+  "descripcion": "prueba"
   
 }
 
-{
-  "id": 2,
-  "descripcion": "no-perecedero"
-  
-}
 
-### modificar un producto
-PUT http://localhost:3000/api/tipo_productos/{{id}}
+### modificar un tipo_producto
+PUT http://localhost:3000/api/tipo_producto/{{id}}
 Content-Type: application/json
+{
+  "descripcion":"no perecedero modificado"
+}
 
 
-
-### borrar un producto
+### borrar un tipo_producto
 
 ### cambiar el id que se quiere eliminar
+
+@id_eliminar=3
 
 DELETE http://localhost:3000/api/tipo_productos/{{id_eliminar}}

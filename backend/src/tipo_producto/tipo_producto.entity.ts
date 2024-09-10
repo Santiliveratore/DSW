@@ -5,7 +5,7 @@ import { Entity,PrimaryKey,Property } from "@mikro-orm/core"
 export class Tipo_producto {
 
     @PrimaryKey()  
-    id?: int
+    id?: number
 
     @Property()
     descripcion!: string
