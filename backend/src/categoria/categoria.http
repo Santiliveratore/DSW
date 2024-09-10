@@ -1,0 +1,33 @@
+### obtener todos las categorias
+GET http://localhost:3000/api/categorias
+
+
+### obtener una categoria
+
+ @id=2
+GET http://localhost:3000/api/categorias/{{id}}
+
+
+### crear una nueva categoria
+
+POST http://localhost:3000/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Electrodomesticos"
+}
+
+### modificar una categoria
+PUT http://localhost:3000/api/categorias/{{id}}
+Content-Type: application/json
+
+{
+  "nombre": "Gaseosas"
+}
+
+### borrar una categoria
+
+### cambiar el id que se quiere eliminar
+ @id_eliminar=7
+
+DELETE http://localhost:3000/api/categorias/{{id_eliminar}}

@@ -1,29 +1,30 @@
 ### obtener todos los tipo_productos
-GET http://localhost:3000/api/tipo_producto
+GET http://localhost:3000/api/tipo_productos
 
 
 ### obtener un tipo_producto
 
 @id=2
 
-GET http://localhost:3000/api/tipo_producto/{{id}}
+GET http://localhost:3000/api/tipo_productos/{{id}}
 
 
 ### crear un nuevo tipo_producto
 
-POST http://localhost:3000/api/tipo_producto
+POST http://localhost:3000/api/tipo_productos
 Content-Type: application/json
 
 {
-  
+ 
   "descripcion": "prueba"
   
 }
 
 
 ### modificar un tipo_producto
-PUT http://localhost:3000/api/tipo_producto/{{id}}
+PUT http://localhost:3000/api/tipo_productos/{{id}}
 Content-Type: application/json
+
 {
   "descripcion":"no perecedero modificado"
 }

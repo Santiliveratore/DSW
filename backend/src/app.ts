@@ -5,6 +5,7 @@ import { orm } from './shared/db/orm.js'
 import { RequestContext } from '@mikro-orm/core'
 import { productoRouter } from './producto/producto.routes.js'
 import { tipo_productoRouter } from './tipo_producto/tipo_producto.routes.js'
+import { categoriaRouter } from './categoria/categoria.routes.js'
 
 const app = express()
 app.use(express.json())
@@ -14,7 +15,8 @@ app.use((req,res,next)=>{
   RequestContext.create(orm.em, next)
 })
 
-app.use('/api/tipo_producto',tipo_productoRouter)
+app.use('/api/categorias',categoriaRouter)
+app.use('/api/tipo_productos',tipo_productoRouter)
 app.use('/api/productos',productoRouter)
 app.use('/api/clientes', clienteRouter)
 
