@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet,RouterLink } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -10,7 +11,7 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,RouterLink,HeaderComponent,FooterComponent,LogInComponent,SignUpComponent,CatalogoComponent],
+  imports: [CommonModule,RouterOutlet,RouterLink,HeaderComponent,FooterComponent,LogInComponent,SignUpComponent,CatalogoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
