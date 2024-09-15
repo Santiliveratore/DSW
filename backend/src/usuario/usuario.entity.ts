@@ -2,13 +2,13 @@ import { Entity,PrimaryKey,Property } from "@mikro-orm/core"
 
 
 @Entity()
-export class Cliente {
+export class Usuario {
 
     @PrimaryKey()  
     id?:number
 
     @Property()
-    name!: string
+    nombre!: string
 
     @Property()
     apellido!: string
@@ -18,6 +18,17 @@ export class Cliente {
 
     @Property()
     email!:string
+
+    @Property()
+    contraseña!:string
+
+    @Property()
+    rol!:string
+
+    @Property()
+    foto?:string
+
+    
     
   
 }

@@ -1,0 +1,35 @@
+### obtener todos los usuarios
+GET http://localhost:3000/api/usuarios
+
+
+### obtener un usuario por su id
+@id=2
+GET http://localhost:3000/api/usuarios/{{id}}
+
+### crear un nuevo usuario
+POST http://localhost:3000/api/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Atila",
+  "apellido": "warrior",
+  "dni": 2222222,
+  "email": "aaaa@gmail.com"
+}
+
+### modificar un usuario por su id
+PUT http://localhost:3000/api/usuarios/{{id}}
+Content-Type: application/json
+
+{
+  "nombre": "Julian",
+  "apellido": "Butti",
+  "dni": 33333,
+  "email":"bbbb@gmail.com"   
+}
+
+
+
+### borrar un usuario
+@id_eliminar= 
+DELETE http://localhost:3000/api/usuarios/{{id_eliminar}}
