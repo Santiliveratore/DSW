@@ -4,34 +4,26 @@
       <h1 class="title-font font-medium text-3xl text-gray-900">SuperUTN tu supermercado de confianza!</h1>
       <p class="leading-relaxed mt-4">Crea tu cuenta para acceder a las funcionalidades principales y poder hacer tus compras</p>
     </div>
-    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
       <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Crea tu cuenta</h2>
       <p class="text-gray-900 title-font mb-5">Complete con sus datos</p>
       <div class="relative mb-4">
         <label for="nombre" class="leading-7 text-sm text-gray-600">Nombre</label>
-        <input type="text" id="nombre" name="nombre" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+        <input type="text" id="nombre" formControlName="nombre" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
       </div>
       <div class="relative mb-4">
         <label for="apellido" class="leading-7 text-sm text-gray-600">Apellido</label>
-        <input type="text" id="apellido" name="apellido" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="relative mb-4">
-        <label for="ciudad" class="leading-7 text-sm text-gray-600">Ciudad</label>
-        <input type="text" id="ciudad" name="ciudad" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-      </div>
-      <div class="relative mb-4">
-        <label for="direccion" class="leading-7 text-sm text-gray-600">Direccion</label>
-        <input type="text" id="direccion" name="direccion" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+        <input type="text" id="apellido" formControlName="apellido" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
       </div>
       <div class="relative mb-4">
         <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-        <input type="email" id="email" name="email" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+        <input type="email" id="email" formControlName="email" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
       </div>
       <div class="relative mb-4">
-          <label for="password" class="leading-7 text-sm text-gray-600">Contraseña</label>
-          <input type="password" id="password" name="password" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <label for="contraseña" class="leading-7 text-sm text-gray-600">Contraseña</label>
+          <input type="password" id="contraseña" formControlName="contraseña" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
         </div>
-      <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Registrarse</button>
-    </div>
+      <button type="submit" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Registrarse</button>
+      </form>
   </div>
 </section>

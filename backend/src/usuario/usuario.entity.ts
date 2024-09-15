@@ -13,8 +13,8 @@ export class Usuario {
     @Property()
     apellido!: string
 
-    @Property()
-    dni!: number
+   // @Property()
+    // dni!: number
 
     @Property()
     email!:string
@@ -22,11 +22,11 @@ export class Usuario {
     @Property()
     contraseña!:string
 
-    @Property()
-    rol!:string
+    //@Property()
+    //rol!:string
 
-    @Property()
-    foto?:string
+    //@Property()
+    //foto?:string
 
     
     
