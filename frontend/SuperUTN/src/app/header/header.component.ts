@@ -1,4 +1,4 @@
-import { Component,OnInit,OnChanges } from '@angular/core';
+import { Component,OnInit,OnChanges} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
@@ -19,6 +19,12 @@ export class HeaderComponent implements OnInit{
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
+
+    // Nos suscribimos a los cambios del usuario
+    this.usuarioService.getUsuarioObservable().subscribe(usuario => {
+      this.usuario = usuario;
+    });
+    // Comprobamos si ya existe un usuario logueado al cargar el componente
     this.usuario = this.usuarioService.getUsuarioActual();
   }
 
@@ -28,7 +34,7 @@ export class HeaderComponent implements OnInit{
 
   logOut(): void {
     this.usuarioService.clearToken();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/logIn']);
     this.usuario = null;  // Limpiar usuario actual
   }
 
