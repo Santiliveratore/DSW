@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { orm } from '../shared/db/orm.js'
 import { Usuario } from './usuario.entity.js'
+import jwt from 'jsonwebtoken';
 
 const em = orm.em
 
@@ -58,4 +59,39 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export {findAll, findOne, add, update, remove }
+async function login(req: Request, res: Response) {
+  try {
+    const { email, contraseña } = req.body;
+
+    // Buscar el usuario en la base de datos usando el email
+    const usuario = await em.findOne(Usuario, { email });
+
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Comparar la contraseña ingresada con la almacenada en la base de datos. Cambiarlo por hash en otro momento
+    const contraseñaValida = contraseña === usuario.contraseña;
+
+
+    if (!contraseñaValida) {
+      return res.status(401).json({ message: 'Contraseña incorrecta' });
+    }
+
+    // Generar un token de autenticación (JWT)
+    const token = jwt.sign(
+      { id: usuario.id,email: usuario.email, nombre: usuario.nombre ,apellido: usuario.apellido },  // Datos que quieres incluir en el token
+      'clave_secreta',  // Usa una clave secreta fuerte en producción
+      { expiresIn: '1h' }  // El token expira en 1 hora
+    );
+
+    // Devolver el token al frontend
+    res.status(200).json({ message: 'Login exitoso', token});
+
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+
+export {findAll, findOne, add, update, remove, login }

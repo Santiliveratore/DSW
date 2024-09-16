@@ -5,10 +5,17 @@
       <div class="brand-name">SuperUTN</div>
   </a>
   </div>
-  <div class="auth-buttons">
+  <div *ngIf="!isLoggedIn(); else loggedInBlock" class="auth-buttons">
     <button><a routerLink="/logIn">Iniciar Sesión</a></button>
     <button><a routerLink="/signUp">Registrarse</a></button>
   </div>
+
+  <ng-template #loggedInBlock>
+    <div class="user-info">
+      <span>Bienvenido, {{ usuario?.nombre }} {{ usuario?.apellido }}</span>
+      <button (click)="logOut()">Cerrar Sesión</button>
+    </div>
+  </ng-template>
 </header>
 <nav>
   <a>Todo</a>
@@ -17,3 +24,4 @@
   <a>Hogar</a>
   <a>Electrodomésticos</a>
 </nav>
+
