@@ -80,7 +80,7 @@ async function login(req: Request, res: Response) {
 
     // Generar un token de autenticación (JWT)
     const token = jwt.sign(
-      { id: usuario.id,email: usuario.email, nombre: usuario.nombre ,apellido: usuario.apellido },  // Datos que quieres incluir en el token
+      { id: usuario.id,email: usuario.email, nombre: usuario.nombre ,apellido: usuario.apellido ,rol: usuario.rol },  // Datos que quieres incluir en el token
       'clave_secreta',  // Usa una clave secreta fuerte en producción
       { expiresIn: '1h' }  // El token expira en 1 hora
     );

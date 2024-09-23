@@ -12,8 +12,16 @@
 
   <ng-template #loggedInBlock>
     <div class="user-info">
-      <span>Bienvenido, {{ usuario?.nombre }} {{ usuario?.apellido }}</span>
-      <button (click)="logOut()">Cerrar Sesión</button>
+      <b>Bienvenido, {{ usuario?.nombre }} {{ usuario?.apellido }}</b>
+      
+      <div class="dropdown" (click)="toggleDropdown()">
+        <i class="fas fa-bars"></i> <!-- Ícono de menu -->
+        <div *ngIf="dropdownOpen" class="dropdown-menu">
+          <a (click)="logOut()">Cerrar Sesión</a>
+          <a routerLink="/profile">Perfil</a>
+          <!-- Puedes agregar más opciones aquí -->
+        </div>
+      </div>
     </div>
   </ng-template>
 </header>

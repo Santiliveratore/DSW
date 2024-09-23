@@ -18,6 +18,7 @@ export class UsuarioService {
 
   // METODO PARA REGISTRARSE
   crearUsuario(usuario: any): Observable<any> {
+    usuario.rol='cliente'
     return this.http.post(this.apiUrl, usuario);
   }
 
@@ -72,6 +73,17 @@ export class UsuarioService {
   // Verificar si hay sesión iniciada
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  // Verifica si sos Admin,Cliente o no estas logueado
+  isAdmin():boolean|null{
+   
+    this.usuarioActual=this.getUsuarioActual();
+    if(this.usuarioActual){
+      if(this.usuarioActual.rol==='admin'){return true}
+      if(this.usuarioActual.rol==='cliente'){return false}
+    }
+    return null
   }
   
 }

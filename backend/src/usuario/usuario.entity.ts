@@ -22,8 +22,8 @@ export class Usuario {
     @Property()
     contraseña!:string
 
-    //@Property()
-    //rol!:string
+    @Property()
+    rol!:string
 
     //@Property()
     //foto?:string

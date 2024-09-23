@@ -18,6 +18,7 @@ export class SignUpComponent {
     apellido: new FormControl('',Validators.required),
     email: new FormControl('',[Validators.required, Validators.email]),
     contraseña: new FormControl('',Validators.required)
+    
   })
 
   constructor(private usuarioService: UsuarioService,
