@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { Observable,BehaviorSubject } from 'rxjs';
+import { Observable,BehaviorSubject,throwError } from 'rxjs';
 import {jwtDecode} from "jwt-decode"
 
 
@@ -85,5 +85,7 @@ export class UsuarioService {
     }
     return null
   }
+
+  
   
 }

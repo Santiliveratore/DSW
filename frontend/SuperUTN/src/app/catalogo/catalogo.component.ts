@@ -33,6 +33,23 @@ export class CatalogoComponent implements OnInit  {
     return this.usuarioService.isAdmin();
   }
 
+  eliminarProducto(productoId: string): void {
+    // Mostrar alerta de confirmación
+    const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
   
+    if (confirmacion) {
+      // Si el usuario confirma, proceder con la eliminación
+      this.service.eliminarProducto(productoId).subscribe({
+        next: (response) => {
+          console.log('Producto eliminado', response);
+          // Eliminar el producto del arreglo local
+          this.productos = this.productos.filter((p: any) => p.id !== productoId);
+        },
+        error: (err) => {
+          console.error('Error eliminando el producto:', err);
+        }
+      });
+    }
+  }
 
 }
