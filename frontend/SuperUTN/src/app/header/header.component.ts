@@ -42,6 +42,9 @@ export class HeaderComponent implements OnInit{
     this.router.navigate(['/logIn']);
     this.usuario = null;  // Limpiar usuario actual
   }
+  isAdmin(): boolean|null {
+    return this.usuarioService.isAdmin();
+  }
 
 }
 

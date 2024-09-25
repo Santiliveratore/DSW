@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray,FormBuilder,FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
+import {FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
 

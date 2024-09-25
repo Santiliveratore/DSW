@@ -4,7 +4,7 @@
       <div class="lg:w-1/5 md:w-1/3 p-2 w-full" *ngFor="let producto of productos"> <!-- Ajuste de ancho del ítem -->
         <div class="border border-gray-300 rounded-lg p-4 shadow-sm"> <!-- Borde añadido aquí -->
           <a class="block relative h-48 rounded overflow-hidden bg-white-200">
-            <img class="object-contain object-center w-full h-full" [src]="'productos/'+producto.foto" alt="{{ producto.nombre }}"> <!-- Ajuste para centrar la imagen -->
+            <img class="object-contain object-center w-full h-full" [src]="'/productos/'+ producto.foto" alt="{{ producto.nombre }}"> <!-- Ajuste para centrar la imagen -->
           </a>
           <div class="mt-4 text-center"> <!-- Centrado del texto -->
             <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ producto.descripcion }}</h3>

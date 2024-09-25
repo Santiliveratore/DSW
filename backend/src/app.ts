@@ -8,7 +8,9 @@ import { tipo_productoRouter } from './tipo_producto/tipo_producto.routes.js'
 import { categoriaRouter } from './categoria/categoria.routes.js'
 
 
+
 const app = express()
+
 app.use(express.json())
 
 // codigo para permitir que se acceda a la api desde el servidor frontend
@@ -18,6 +20,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
+
+
 
 
 
