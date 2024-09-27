@@ -17,9 +17,9 @@ export class CatalogoService {
     return this.http.get<any>(this.url)}
 
  
-    eliminarProducto(id:string): Observable<any>{
+    eliminarProducto(id:string,foto:string): Observable<any>{
       if(this.usuarioService.isAdmin()){ //solo se puede eliminar si sos admin
-        return this.http.delete(`${this.url}/${id}`);
+        return this.http.delete(`${this.url}/${id}/${foto}`);
       }else {
         return throwError(() => new Error('No tienes permisos para eliminar el producto.'));
       }

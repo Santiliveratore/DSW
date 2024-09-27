@@ -22,7 +22,7 @@ export class Producto {
     //@Property()
     //id_categoria!:number
 
-    @Property({nullable:true})
+    @Property()
     foto?:string
     
 }
