@@ -7,7 +7,12 @@ import { productoRouter } from './producto/producto.routes.js'
 import { tipo_productoRouter } from './tipo_producto/tipo_producto.routes.js'
 import { categoriaRouter } from './categoria/categoria.routes.js'
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+import cors from 'cors';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express()
 
@@ -20,6 +25,12 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
+
+
+
+// Servir la carpeta 'public/productos' como estática
+app.use(cors()); //habilitar unas restricciones del navegador
+app.use('/productos', express.static(path.join(__dirname, '../src/public/productos')));
 
 
 
@@ -42,5 +53,7 @@ app.use((_, res) => {
 
 
 app.listen(3000, () => {
+  console.log(__dirname);
   console.log('Server runnning on http://localhost:3000/')
+  
 })
