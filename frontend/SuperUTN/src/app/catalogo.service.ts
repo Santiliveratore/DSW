@@ -24,4 +24,13 @@ export class CatalogoService {
         return throwError(() => new Error('No tienes permisos para eliminar el producto.'));
       }
     }  
+
+    crearProducto(producto: any,im:File): Observable<any> {
+      const formData = new FormData();
+      formData.append('nombre', producto.nombre);
+      formData.append('descripcion', producto.descripcion);
+      formData.append('precio', producto.precio.toString());
+      formData.append('foto', im); // Agrega la imagen al FormData
+      return this.http.post(this.url, formData);
+    }
 }

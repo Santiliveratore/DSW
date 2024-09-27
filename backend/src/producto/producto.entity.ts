@@ -16,11 +16,11 @@ export class Producto {
     @Property()
     precio!: number
 
-    @Property()
-    stock!: number
+   // @Property()
+    //stock!: number
 
-    @Property()
-    id_categoria!:number
+    //@Property()
+    //id_categoria!:number
 
     @Property({nullable:true})
     foto?:string

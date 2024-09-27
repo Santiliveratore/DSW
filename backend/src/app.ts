@@ -53,7 +53,7 @@ app.use((_, res) => {
 
 
 app.listen(3000, () => {
-  console.log(__dirname);
+  console.log(path.join(__dirname, '../src/public/productos'));
   console.log('Server runnning on http://localhost:3000/')
   
 })

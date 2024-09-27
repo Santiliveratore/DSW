@@ -26,13 +26,24 @@ async function findOne(req: Request, res: Response) {
 }
 
 async function add(req: Request, res: Response) {
-  try{
-    const producto = em.create(Producto,req.body)
-    await em.flush()
-    res.status(201).json({message:'producto creado',data:producto})
+  try {
+    // Verifica si el archivo fue subido
+    if (!req.file) {
+      return res.status(400).json({ message: 'La imagen es requerida' });
+    }
 
-  }catch(error:any){
-    res.status(500).json({message:error.message})
+    // Crea el producto utilizando el cuerpo de la solicitud y el nombre de la imagen
+    const producto = em.create(Producto, {
+      ...req.body,
+      foto: req.file.filename, // Guarda solo el nombre del archivo
+    });
+
+    await em.flush(); // Guarda el producto en la base de datos
+
+    res.status(201).json({ message: 'Producto creado', data: producto });
+
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 }
 

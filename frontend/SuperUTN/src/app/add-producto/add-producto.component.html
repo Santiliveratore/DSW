@@ -5,7 +5,7 @@
       <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">Agregar Nuevo Producto</h2>
   
       <!-- Formulario reactivo -->
-      <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="space-y-6">
   
         <!-- Vista previa de la imagen -->
         <div *ngIf="selectedImage" class="flex justify-center mb-4">
