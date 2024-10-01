@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CatalogoService } from '../catalogo.service';
 import { UsuarioService } from '../usuario.service';
+import { RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [RouterLink,CommonModule],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
 })
@@ -51,5 +52,7 @@ export class CatalogoComponent implements OnInit  {
       });
     }
   }
+
+  
 
 }

@@ -49,28 +49,54 @@ async function add(req: Request, res: Response) {
   }
 }
 
+//async function update(req: Request, res: Response) {
+//  try{
+   // const id = Number.parseInt(req.params.id)
+   // const producto = em.getReference(Producto,id)
+   // em.assign(producto,req.body)
+   // await em.flush()
+   // res.status(200).json({message:'producto actualizado'})
+  //}catch(error:any){
+  //  res.status(500).json({message:error.message})
+  //}
+//}
+
 async function update(req: Request, res: Response) {
-  try{
-    const id = Number.parseInt(req.params.id)
-    const producto = em.getReference(Producto,id)
-    em.assign(producto,req.body)
-    await em.flush()
-    res.status(200).json({message:'producto actualizado'})
-  }catch(error:any){
-    res.status(500).json({message:error.message})
+  const em = orm.em.fork(); // Clonamos el EntityManager para este contexto
+  try {
+    const id = Number.parseInt(req.params.id);
+    const producto = await em.findOneOrFail(Producto, id); // Usamos findOneOrFail para obtener el producto
+
+    // Si se envía una nueva foto, manejamos la eliminación de la antigua
+    if (req.file) {
+      const oldFoto = producto.foto; // Suponiendo que 'foto' tiene el nombre del archivo
+
+      em.assign(producto, req.body);
+      producto.foto = req.file.filename; // Actualizamos la foto con la nueva
+
+      // Eliminar la foto antigua
+      if (oldFoto) {
+        const oldFilePath = path.join(path.resolve('src/public/productos/'), oldFoto);
+        fs.unlink(oldFilePath, (err) => {
+          if (err) {
+            console.error(`Error al eliminar el archivo: ${oldFilePath}`, err);
+          }
+        });
+      }
+    } else {
+      // Si no hay nueva foto, simplemente actualizamos los datos
+      em.assign(producto, req.body);
+    }
+
+    await em.flush(); // Guardamos los cambios en la base de datos
+    res.status(200).json({ message: 'Producto actualizado' });
+  } catch (error: any) {
+    console.error('Error al actualizar el producto:', error);
+    res.status(500).json({ message: error.message });
   }
 }
 
-//async function remove(req: Request, res: Response) {
-  //try{
-    //const id = Number.parseInt(req.params.id)
-    //const producto = em.getReference(Producto,id)
-    //await em.removeAndFlush(producto)
-    //res.status(204).send({message:'producto eliminado'})
-  //}catch(error:any){
-    //res.status(500).json({message:error.message})
-  //}
-//}
+
 
 async function remove(req: Request, res: Response) {
   try {

@@ -33,4 +33,25 @@ export class CatalogoService {
       formData.append('foto', im); // Agrega la imagen al FormData
       return this.http.post(this.url, formData);
     }
+
+    getProducto(id: number): Observable<any> {
+      return this.http.get<any>(`${this.url}/${id}`);
+    }
+
+    editProducto(id:number,producto:any,im:File|null): Observable<any>{
+
+
+      const formData = new FormData();
+      // Agregar los datos del producto al FormData
+      formData.append('nombre', producto.value.nombre);
+      formData.append('descripcion',producto.value.descripcion);
+      if (producto.value.precio !== undefined && producto.value.precio !== null) {
+        formData.append('precio', producto.value.precio.toString());
+      }
+      if (im!=null) {
+        formData.append('foto', im);
+      }
+      
+      return this.http.put<any>(`${this.url}/${id}`, formData);
+    };
 }
