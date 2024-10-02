@@ -18,30 +18,43 @@
         <div class="mb-4">
           <label for="nombre" class="block text-sm font-semibold text-gray-700">Nombre del producto</label>
           <input formControlName="nombre" id="nombre" type="text" class="mt-1 block w-full shadow-sm border border-gray-300 rounded-lg py-2 px-4 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm placeholder-gray-400" placeholder="Escribe el nombre">
+          <div *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched" class="text-red-500 text-sm mt-1">
+            <span *ngIf="productoForm.get('nombre')?.errors?.['required']">El campo nombre es obligatorio.</span>
+          </div>
         </div>
   
         <!-- Campo para descripción del producto -->
         <div class="mb-4">
           <label for="descripcion" class="block text-sm font-semibold text-gray-700">Descripción</label>
           <textarea formControlName="descripcion" id="descripcion" rows="4" class="mt-1 block w-full shadow-sm border border-gray-300 rounded-lg py-2 px-4 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm placeholder-gray-400" placeholder="Escribe una descripción"></textarea>
+          <div *ngIf="productoForm.get('descripcion')?.invalid && productoForm.get('descripcion')?.touched" class="text-red-500 text-sm mt-1">
+            <span *ngIf="productoForm.get('descripcion')?.errors?.['required']">El campo descripcion es obligatorio.</span>
+          </div>
         </div>
   
         <!-- Campo para precio del producto -->
         <div class="mb-4">
           <label for="precio" class="block text-sm font-semibold text-gray-700">Precio</label>
           <input formControlName="precio" id="precio" type="number" class="mt-1 block w-full shadow-sm border border-gray-300 rounded-lg py-2 px-4 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm placeholder-gray-400" placeholder="Escribe el precio">
+          <div *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched" class="text-red-500 text-sm mt-1">
+            <span *ngIf="productoForm.get('precio')?.errors?.['required']">El campo precio es obligatorio.</span>
+          </div>
         </div>
   
         <!-- Campo para imagen (selector de archivo) -->
         <div class="mb-4">
           <label for="foto" class="block text-sm font-semibold text-gray-700">Imagen del producto</label>
           <input  formControlName="foto" type="file" id="foto" (change)="onFileSelected($event)" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+          <div *ngIf="productoForm.get('foto')?.invalid && productoForm.get('foto')?.touched" class="text-red-500 text-sm mt-1">
+            <span *ngIf="productoForm.get('foto')?.errors?.['required']">El campo foto es obligatorio.</span>
+          </div>
         </div>
   
         <!-- Botón para enviar el formulario -->
         <div class="flex justify-center">
           <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Agregar Producto</button>
         </div>
+        <p *ngIf="errorMessage" class="text-red-500 mt-3">{{ errorMessage }}</p>
         
       </form>
     </div>

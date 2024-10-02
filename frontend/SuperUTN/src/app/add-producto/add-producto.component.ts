@@ -21,6 +21,7 @@ export class AddProductoComponent{
     precio: new FormControl('',Validators.required),
     foto: new FormControl('',Validators.required)
   });
+  errorMessage: string | null = null;
 
   constructor(private catalogoService: CatalogoService,
     private router: Router){};
@@ -56,7 +57,12 @@ export class AddProductoComponent{
         });
       
       }else {
-        console.log('Formulario no válido');
-      }}
+        this.productoForm.markAllAsTouched();
+        this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+      }
+    }else{
+        this.productoForm.markAllAsTouched();
+        this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+    }
     }
 }

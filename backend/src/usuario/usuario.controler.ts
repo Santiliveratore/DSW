@@ -26,15 +26,27 @@ async function findOne(req: Request, res: Response) {
 }
 
 async function add(req: Request, res: Response) {
-  try{
-    const usuario = em.create(Usuario,req.body)
-    await em.flush()
-    res.status(201).json({message:'usuario creado',data:usuario})
+  try {
+    const { email } = req.body;
 
-  }catch(error:any){
-    res.status(500).json({message:error.message})
+    // Verificar si el email ya está en uso
+    const usuarioExistente = await em.findOne(Usuario, { email });
+
+    if (usuarioExistente) {
+      return res.status(400).json({ message: 'El correo electrónico ya está en uso' });
+    }
+
+    // Crear el nuevo usuario si el email no está en uso
+    const usuario = em.create(Usuario, req.body);
+    await em.flush();
+
+    res.status(201).json({ message: 'Usuario creado', data: usuario });
+
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 }
+
 
 async function update(req: Request, res: Response) {
   try{

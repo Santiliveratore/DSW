@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import {FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
@@ -19,7 +20,8 @@ export class SignUpComponent {
     email: new FormControl('',[Validators.required, Validators.email]),
     contraseña: new FormControl('',Validators.required)
     
-  })
+  });
+  errorMessage: string | null = null;
 
   constructor(private usuarioService: UsuarioService,
     private router: Router
@@ -36,11 +38,14 @@ export class SignUpComponent {
           this.router.navigate(['']);
         },
         error: (err) => {
-          console.error('Error al crear usuario:', err);  // Maneja el error
+          if (err.status === 400) {
+            this.errorMessage = 'El email ingresado ya ha sido utilizado';
+          }
         }
       });
     } else {
-      console.log('Formulario no válido');
+      this.userForm.markAllAsTouched();
+      this.errorMessage = 'Por favor, completa todos los campos correctamente.';
     }
   }
 
