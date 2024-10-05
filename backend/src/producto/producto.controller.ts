@@ -7,13 +7,27 @@ import path from 'path';
 
 const em = orm.em
 
-async function findAll(req: Request, res: Response) {
-  try{
-    const productos = await em.find(Producto,{})
-    res.status(200).json({message:'fin all productos', data:productos})
+//async function findAll(req: Request, res: Response) {
+ // try{
+  //  const productos = await em.find(Producto,{})
+  //  res.status(200).json({message:'fin all productos', data:productos})
 
-  } catch(error:any){
-    res.status(500).json({message:error.message})
+  //} catch(error:any){
+  //  res.status(500).json({message:error.message})
+ // }
+//}
+
+async function findAll(req: Request, res: Response) {
+  try {
+    const { categoria } = <any>req.query; // Obtiene el parámetro de categoría de la consulta
+
+    // Si se proporciona una categoría, busca solo los productos de esa categoría
+    // Si no se proporciona, busca todos los productos
+    const productos = await em.find(Producto, categoria ? { categoria: categoria } : {});
+
+    res.status(200).json({ message: 'fin all productos', data: productos });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 }
 

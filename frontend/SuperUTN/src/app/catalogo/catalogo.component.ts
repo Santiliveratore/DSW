@@ -33,6 +33,14 @@ export class CatalogoComponent implements OnInit  {
   isAdmin(): boolean|null {
     return this.usuarioService.isAdmin();
   }
+  getProductos(){this.service.getProductos().subscribe(response=>this.productos=response.data)};
+  
+  // Método para filtrar productos por categoría
+  filtrarProductos(categoria: string): void {
+    this.service.getProductosPorCategoria(categoria).subscribe(response => {
+      this.productos = response.data;
+    });
+  }
 
   eliminarProducto(productoId: string,fotoUrl:string): void {
     // Mostrar alerta de confirmación

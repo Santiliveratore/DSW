@@ -16,6 +16,10 @@ export class CatalogoService {
     
     return this.http.get<any>(this.url)}
 
+    getProductosPorCategoria(categoria: string) {
+      return this.http.get<any>(`${this.url}?categoria=${categoria}`);
+    }
+
  
     eliminarProducto(id:string,foto:string): Observable<any>{
       if(this.usuarioService.isAdmin()){ //solo se puede eliminar si sos admin

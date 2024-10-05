@@ -1,4 +1,5 @@
-import { Entity,PrimaryKey,Property } from "@mikro-orm/core"
+import { Entity,PrimaryKey,Property,ManyToOne } from "@mikro-orm/core"
+import { Categoria } from "../categoria/categoria.entity.js"
 
 
 @Entity()
@@ -19,10 +20,10 @@ export class Producto {
    // @Property()
     //stock!: number
 
-    //@Property()
-    //id_categoria!:number
-
     @Property()
     foto?:string
+
+    @ManyToOne(() => Categoria, { eager: true,fieldName: 'id_categoria' })
+    categoria!: Categoria;
     
 }
