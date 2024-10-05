@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {FormGroup,FormControl,ReactiveFormsModule, Validators } from '@angular/forms';
 import { CatalogoService } from '../catalogo.service';
 import { Router } from '@angular/router';
@@ -7,24 +7,30 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-producto',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,],
   templateUrl: './add-producto.component.html',
   styleUrl: './add-producto.component.css'
 })
-export class AddProductoComponent{
+export class AddProductoComponent implements OnInit{
   selectedImage: File | null = null; // Imagen seleccionada
   imagePreview: string | ArrayBuffer | null = ''; // Vista previa de la imagen
+  categorias:any=[]=[];
 
   productoForm = new FormGroup({
     nombre: new FormControl('',Validators.required),
     descripcion: new FormControl('',Validators.required),
     precio: new FormControl('',Validators.required),
-    foto: new FormControl('',Validators.required)
+    foto: new FormControl('',Validators.required),
+    categoria: new FormControl('',Validators.required)
   });
   errorMessage: string | null = null;
 
   constructor(private catalogoService: CatalogoService,
     private router: Router){};
+
+  ngOnInit(): void {
+    this.catalogoService.getCategorias().subscribe(response=>this.categorias=response.data)
+  }
 
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];

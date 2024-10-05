@@ -40,6 +40,17 @@
             <span *ngIf="productoForm.get('precio')?.errors?.['required']">El campo precio es obligatorio.</span>
           </div>
         </div>
+
+          <!-- Campo para selección de categoría -->
+        <div class="mb-4">
+          <label for="categoria" class="block text-sm font-semibold text-gray-700">Categoría</label>
+          <select formControlName="categoria" id="categoria" class="mt-1 block w-full shadow-sm border border-gray-300 rounded-lg py-2 px-4 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <option *ngFor="let categoria of categorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
+          </select>
+          <div *ngIf="productoForm.get('categoria')?.invalid && productoForm.get('categoria')?.touched" class="text-red-500 text-sm mt-1">
+            <span *ngIf="productoForm.get('categoria')?.errors?.['required']">La categoría es obligatoria.</span>
+          </div>
+        </div>
   
         <!-- Campo para imagen (selector de archivo) -->
         <div class="mb-4">

@@ -20,6 +20,8 @@ export class CatalogoService {
       return this.http.get<any>(`${this.url}?categoria=${categoria}`);
     }
 
+    getCategorias(){return this.http.get<any>('http://localhost:3000/api/categorias')}
+
  
     eliminarProducto(id:string,foto:string): Observable<any>{
       if(this.usuarioService.isAdmin()){ //solo se puede eliminar si sos admin
@@ -34,6 +36,7 @@ export class CatalogoService {
       formData.append('nombre', producto.nombre);
       formData.append('descripcion', producto.descripcion);
       formData.append('precio', producto.precio.toString());
+      formData.append('categoria', producto.categoria.toString());
       formData.append('foto', im); // Agrega la imagen al FormData
       return this.http.post(this.url, formData);
     }
