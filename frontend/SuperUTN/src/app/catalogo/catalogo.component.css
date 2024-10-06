@@ -4,3 +4,9 @@ nav{
     display: flex;
     justify-content: space-around;
   }
+
+  a.active {
+    color: #3d77f3; 
+    font-weight: bold;
+    border-bottom: 2px solid #3d77f3; 
+  }

@@ -10,6 +10,7 @@ import { UsuarioService } from './usuario.service';
 export class CatalogoService {
 
    url='http://localhost:3000/api/productos'
+   
 
   constructor(private http:HttpClient, private usuarioService: UsuarioService) { } 
   getProductos(){
@@ -40,6 +41,10 @@ export class CatalogoService {
       formData.append('foto', im); // Agrega la imagen al FormData
       return this.http.post(this.url, formData);
     }
+
+    crearCategoria(categoria:any):Observable<any>{
+        return this.http.post('http://localhost:3000/api/categorias', categoria);
+    };
 
     getProducto(id: number): Observable<any> {
       return this.http.get<any>(`${this.url}/${id}`);

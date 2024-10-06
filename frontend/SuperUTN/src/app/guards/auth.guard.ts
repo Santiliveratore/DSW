@@ -13,6 +13,17 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 }
 
+export const notAuthGuard: CanActivateFn = (route, state) => {
+  const usuarioService= inject(UsuarioService);
+  const router= inject(Router);
+  if(usuarioService.isLoggedIn()){
+    router.navigateByUrl('');
+    return false
+  }else{
+    return true
+  }
+}
+
 export const authAdminGuard: CanActivateFn = (route, state) => {
   const usuarioService= inject(UsuarioService);
   const router= inject(Router);

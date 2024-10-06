@@ -13,7 +13,9 @@ import { RouterLink} from '@angular/router';
 })
 export class CatalogoComponent implements OnInit  {
   productos:any=[]=[];
+  categorias:any=[]=[];
   usuario: any = null;
+  selectedCategory: string = 'Todo';
 
   constructor(private service:CatalogoService,private usuarioService: UsuarioService){}
 
@@ -25,6 +27,9 @@ export class CatalogoComponent implements OnInit  {
   // Comprobamos si ya existe un usuario logueado al cargar el componente
   this.usuario = this.usuarioService.getUsuarioActual();
 
+  //Obtengo lista de categorias
+  this.service.getCategorias().subscribe(response=>this.categorias=response.data);
+
   //Obtengo lista de productos
   this.service.getProductos().subscribe(response=>this.productos=response.data);
     
@@ -33,10 +38,13 @@ export class CatalogoComponent implements OnInit  {
   isAdmin(): boolean|null {
     return this.usuarioService.isAdmin();
   }
-  getProductos(){this.service.getProductos().subscribe(response=>this.productos=response.data)};
-  
+  getProductos(){
+    this.selectedCategory = 'Todo';
+    this.service.getProductos().subscribe(response=>this.productos=response.data)};
+
   // Método para filtrar productos por categoría
   filtrarProductos(categoria: string): void {
+    this.selectedCategory = categoria;
     this.service.getProductosPorCategoria(categoria).subscribe(response => {
       this.productos = response.data;
     });

@@ -18,6 +18,7 @@
         <i class="fas fa-bars"></i> <!-- Ícono de menu -->
         <div *ngIf="dropdownOpen" class="dropdown-menu">
           <a *ngIf="isAdmin()" routerLink="/addProducto">Agregar Producto</a>
+          <a *ngIf="isAdmin()" routerLink="/addCategoria">Agregar Categoria</a>
           <a routerLink="/profile">Perfil</a>
           <a (click)="logOut()">Cerrar Sesión</a>
           <!-- Puedes agregar más opciones aquí -->

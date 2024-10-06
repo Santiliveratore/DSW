@@ -1,11 +1,19 @@
 <nav class="flex space-x-4 p-4 bg-gray-100 rounded-lg shadow-md">
-  <a (click)="getProductos()" class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">Todo</a>
-  <a (click)="filtrarProductos('1')" class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">Bebidas</a>
-  <a (click)="filtrarProductos('2')" class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">Dulces</a>
-  <a (click)="filtrarProductos('3')" class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">Limpieza</a>
-  <a (click)="filtrarProductos('4')" class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">Higiene</a>
-  <a (click)="filtrarProductos('5')" class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">Despensa</a>
+  <a 
+    (click)="getProductos()" 
+    [ngClass]="{'active': selectedCategory === 'Todo'}"
+    class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">
+    Todo
+  </a>
+  <a *ngFor="let categoria of categorias"
+    (click)="filtrarProductos(categoria.id)" 
+    [ngClass]="{'active': selectedCategory === categoria.id}"
+    class="cursor-pointer text-gray-600 hover:text-blue-600 focus:text-blue-600 transition duration-300">
+    {{categoria.nombre}}
+  </a>
 </nav>
+
+
 
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
