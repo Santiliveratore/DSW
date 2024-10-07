@@ -1,0 +1,39 @@
+### obtener todos los pedidos
+GET http://localhost:3000/api/pedidos
+
+
+### obtener un pedido
+
+@id=2
+
+GET http://localhost:3000/api/pedidos/{{id}}
+
+
+### crear un nuevo pedido
+
+POST http://localhost:3000/api/pedidos
+Content-Type: application/json
+
+##{
+ 
+  ###
+  
+##}
+
+
+### modificar un pedido
+PUT http://localhost:3000/api/pedidos/{{id}}
+Content-Type: application/json
+
+##{
+  ###
+##}
+
+
+### borrar un pedido
+
+### cambiar el id que se quiere eliminar
+
+@id_eliminar=3
+
+DELETE http://localhost:3000/api/pedidos/{{id_eliminar}}
