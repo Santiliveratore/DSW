@@ -1,0 +1,37 @@
+### obtener todas las localidades
+GET http://localhost:3000/api/localidades
+
+
+### obtener una categoria
+
+ @id=2
+GET http://localhost:3000/api/localidades/{{id}}
+
+
+### crear una nueva localidad
+
+POST http://localhost:3000/api/localidades
+Content-Type: application/json
+
+{
+  "cod_postal": "2000",
+  "nombre": "Rosario"
+
+}
+
+### modificar una localidad
+PUT http://localhost:3000/api/localidades/{{id}}
+Content-Type: application/json
+
+{
+  "cod_postal": "2300",
+  "nombre": "Rafaela"
+
+}
+
+### borrar una localidad
+
+### cambiar el id que se quiere eliminar
+ @id_eliminar=7
+
+DELETE http://localhost:3000/api/localidades/{{id_eliminar}}
