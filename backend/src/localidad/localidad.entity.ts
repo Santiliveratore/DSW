@@ -1,3 +1,4 @@
+
 import { Entity,PrimaryKey,Property,OneToMany,Collection } from "@mikro-orm/core"
 import { Usuario } from "../usuario/usuario.entity.js"
 
