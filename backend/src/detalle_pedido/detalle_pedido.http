@@ -1,0 +1,26 @@
+### obtener todos los detalle_pedidos
+GET http://localhost:3000/api/detalle_pedidos
+
+
+### obtener un detalle_pedido
+
+ @id=2
+GET http://localhost:3000/api/detalle_pedidos/{{id}}
+
+
+### crear nuevo detalle_pedido
+
+POST http://localhost:3000/api/detalle_pedidos
+Content-Type: application/json
+
+
+### modificar un detalle_pedido
+
+PUT http://localhost:3000/api/detalle_pedidos/{{id}}
+Content-Type: application/json
+
+
+### borrar un detalle_pedido
+
+
+DELETE http://localhost:3000/api/categorias/{{id_eliminar}}
