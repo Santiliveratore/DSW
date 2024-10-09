@@ -19,8 +19,9 @@ Content-Type: application/json
 PUT http://localhost:3000/api/detalle_pedidos/{{id}}
 Content-Type: application/json
 
-
 ### borrar un detalle_pedido
 
+### cambiar el id que se quiere eliminar
+ @id_eliminar=7
 
-DELETE http://localhost:3000/api/categorias/{{id_eliminar}}
+DELETE http://localhost:3000/api/detalle_pedidos/{{id_eliminar}}
