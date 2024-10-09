@@ -86,6 +86,6 @@ export class UsuarioService {
     return null
   }
 
-  
+  getLocalidades(){return this.http.get<any>('http://localhost:3000/api/localidades')}
   
 }

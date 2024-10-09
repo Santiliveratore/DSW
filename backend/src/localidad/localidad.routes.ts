@@ -1,10 +1,10 @@
 import { Router } from 'express'
 import { findAll,findOne,add,update,remove } from './localidad.controller.js'
 
-export const categoriaRouter = Router()
+export const localidadRouter = Router()
 
-categoriaRouter.get('/', findAll)
-categoriaRouter.get('/:id', findOne)
-categoriaRouter.post('/', add)
-categoriaRouter.put('/:id', update)
-categoriaRouter.delete('/:id', remove)
+localidadRouter.get('/', findAll)
+localidadRouter.get('/:id', findOne)
+localidadRouter.post('/', add)
+localidadRouter.put('/:id', update)
+localidadRouter.delete('/:id', remove)

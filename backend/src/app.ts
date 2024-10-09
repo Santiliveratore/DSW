@@ -11,6 +11,8 @@ import { pedidoRouter } from './pedido/pedido.routes.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import { detalle_pedidoRouter } from './detalle_pedido/detalle_pedido.routes.js'
+import { localidadRouter } from './localidad/localidad.routes.js'
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -48,6 +50,8 @@ app.use('/api/usuarios', usuarioRouter)
 app.use('/api/categorias',categoriaRouter)
 app.use('/api/tipo_productos',tipo_productoRouter)
 app.use('/api/pedidos',pedidoRouter)
+app.use('/api/detalle_pedidos',detalle_pedidoRouter)
+app.use('/api/localidades',localidadRouter)
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })

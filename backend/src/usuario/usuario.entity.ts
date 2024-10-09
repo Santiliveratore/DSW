@@ -14,9 +14,6 @@ export class Usuario {
     @Property()
     apellido!: string
 
-   // @Property()
-    // dni!: number
-
     @Property()
     email!:string
 
@@ -25,9 +22,6 @@ export class Usuario {
 
     @Property()
     rol!:string
-
-    //@Property()
-    //foto?:string
 
     //relacion con localidad 
     @ManyToOne(() => Localidad, { eager: true,fieldName: 'id_localidad' })
