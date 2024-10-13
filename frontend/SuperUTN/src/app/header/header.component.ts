@@ -3,6 +3,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CarritoService } from '../carrito.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class HeaderComponent implements OnInit{
   usuario: any = null;
   dropdownOpen = false; //menu desplegable
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private usuarioService: UsuarioService, private router: Router,private carritoService: CarritoService) {}
 
   ngOnInit(): void {
 
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit{
 
   logOut(): void {
     this.usuarioService.clearToken();
+    this.carritoService.limpiarCarrito();
     this.router.navigate(['/logIn']);
     this.usuario = null;  // Limpiar usuario actual
   }

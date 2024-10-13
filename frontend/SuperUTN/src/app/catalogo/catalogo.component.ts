@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CatalogoService } from '../catalogo.service';
 import { UsuarioService } from '../usuario.service';
 import { RouterLink} from '@angular/router';
+import { CarritoService } from '../carrito.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -17,7 +18,7 @@ export class CatalogoComponent implements OnInit  {
   usuario: any = null;
   selectedCategory: string = 'Todo';
 
-  constructor(private service:CatalogoService,private usuarioService: UsuarioService){}
+  constructor(private service:CatalogoService,private usuarioService: UsuarioService,private carritoService: CarritoService){}
 
   ngOnInit(): void{
    // Nos suscribimos a los cambios del usuario
@@ -70,5 +71,8 @@ export class CatalogoComponent implements OnInit  {
   }
 
   
-
+  agregarAlCarrito(producto: any, cantidad: number) {
+    this.carritoService.agregarAlCarrito(producto, cantidad);
+    console.log('Producto añadido al carrito');
+  }
 }

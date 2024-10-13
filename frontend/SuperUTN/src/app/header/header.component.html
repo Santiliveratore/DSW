@@ -13,6 +13,9 @@
   <ng-template #loggedInBlock>
     <div class="user-info">
       <b>Bienvenido, {{ usuario?.nombre }} {{ usuario?.apellido }}</b>
+        <a *ngIf="!isAdmin()" routerLink="/carrito" class="text-gray-700 ml-14 hover:text-gray-900 transition-colors">
+          <i class="fa-solid fa-shopping-cart text-2xl"></i>
+        </a>
       <span *ngIf="isAdmin()" class="admin-badge">Admin</span>
       <div class="dropdown" (click)="toggleDropdown()">
         <i class="fas fa-bars"></i> <!-- Ícono de menu -->
