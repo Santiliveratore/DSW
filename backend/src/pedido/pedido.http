@@ -4,7 +4,7 @@ GET http://localhost:3000/api/pedidos
 
 ### obtener un pedido
 
-@id=2
+@id=3
 
 GET http://localhost:3000/api/pedidos/{{id}}
 

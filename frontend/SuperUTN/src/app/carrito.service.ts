@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+import { Observable,throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -6,8 +8,9 @@ import { Injectable } from '@angular/core';
 export class CarritoService {
 
   private storageKey = 'carrito';
+  private url='http://localhost:3000/api/pedidos'
 
-  constructor() {}
+  constructor(private http:HttpClient) {}
 
   // Obtener el carrito desde localStorage
   obtenerCarrito() {
@@ -48,5 +51,23 @@ export class CarritoService {
   // Limpiar el carrito (vaciarlo)
   limpiarCarrito() {
     localStorage.removeItem(this.storageKey);
+  }
+
+  crearPedido(lineas: any[], usuarioId: number): Observable<any> {
+    // Construir el cuerpo de la solicitud con las líneas del pedido y el ID del usuario
+    const body = {
+      lineas: lineas.map(linea => ({
+        productoId: linea.producto.id,
+        cantidad: linea.cantidad
+      })),
+      usuarioId: usuarioId
+    };
+
+    // Enviar el POST al endpoint de crear pedido
+    return this.http.post(this.url, body);
+  }
+
+  obtenerPedidosPorUsuario(usuarioId: number): Observable<any> {
+    return this.http.get(`${this.url}/filtrar/${usuarioId}`);
   }
 }

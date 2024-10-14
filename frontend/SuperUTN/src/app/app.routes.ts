@@ -7,13 +7,15 @@ import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
 import { EditProductoComponent } from './edit-producto/edit-producto.component';
 import { authGuard,notAuthGuard,authAdminGuard } from './guards/auth.guard';
 import { CarritoComponent } from './carrito/carrito.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 export const routes: Routes = [
     {path:'',component:CatalogoComponent},
     {path:'logIn',component:LogInComponent,canActivate:[notAuthGuard]},
     {path:'signUp',component:SignUpComponent,canActivate:[notAuthGuard]},
     {path:'addProducto',component:AddProductoComponent,canActivate:[authAdminGuard]},
-    {path:'addCategoria',component:AddCategoriaComponent},
+    {path:'addCategoria',component:AddCategoriaComponent,canActivate:[authAdminGuard]},
     {path:'editProducto/:id',component:EditProductoComponent},
-    {path:'carrito',component:CarritoComponent}
+    {path:'carrito',component:CarritoComponent},
+    {path:'pedidos',component:PedidosComponent}
 ];

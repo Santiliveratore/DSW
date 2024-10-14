@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../carrito.service';
 import { CommonModule } from '@angular/common';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-carrito',
@@ -11,11 +12,13 @@ import { CommonModule } from '@angular/common';
 })
 export class CarritoComponent implements OnInit {
   carrito: any[] = [];
+  usuario:any;
 
-  constructor(private carritoService: CarritoService) {}
+  constructor(private carritoService: CarritoService,private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     this.carrito = this.carritoService.obtenerCarrito();
+    this.usuario = this.usuarioService.getUsuarioActual();
   }
 
   eliminarDelCarrito(productoId: string) {
@@ -40,5 +43,22 @@ export class CarritoComponent implements OnInit {
     return total;
   }
 
-  realizarPedido(){console.log('pedido realizado')}
+  realizarPedido() {
+    if (!this.usuario) {
+      alert('Usuario no autenticado');
+      return;
+    }
+    // Llamar al método del servicio para realizar el pedido
+    this.carritoService.crearPedido(this.carrito,this.usuario.id).subscribe({
+      next: (response) => {
+        console.log('Pedido realizado exitosamente:', response);
+        alert('Pedido realizado con éxito');
+        this.limpiarCarrito(); // Limpiar el carrito después de realizar el pedido
+      },
+      error: (error) => {
+        console.error('Error al realizar el pedido:', error);
+        alert('Error al realizar el pedido, intenta nuevamente.');
+      }
+    });
+  }
 }

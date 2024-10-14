@@ -17,9 +17,6 @@ export class Producto {
     @Property()
     precio!: number
 
-   // @Property()
-    //stock!: number
-
     @Property()
     foto?:string
 

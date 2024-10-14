@@ -22,6 +22,7 @@
         <div *ngIf="dropdownOpen" class="dropdown-menu">
           <a *ngIf="isAdmin()" routerLink="/addProducto">Agregar Producto</a>
           <a *ngIf="isAdmin()" routerLink="/addCategoria">Agregar Categoria</a>
+          <a *ngIf="!isAdmin()" routerLink="/pedidos">Mis Pedidos</a>
           <a routerLink="/profile">Perfil</a>
           <a (click)="logOut()">Cerrar Sesión</a>
           <!-- Puedes agregar más opciones aquí -->

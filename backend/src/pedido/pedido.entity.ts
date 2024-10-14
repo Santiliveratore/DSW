@@ -1,4 +1,6 @@
-import { Entity,PrimaryKey,Property } from "@mikro-orm/core"
+import { Collection, Entity,ManyToOne,OneToMany,PrimaryKey,Property } from "@mikro-orm/core"
+import { Usuario } from "../usuario/usuario.entity.js";
+import { DetallePedido } from "../detallePedido/detallePedido.entity.js";
 
 
 @Entity()
@@ -8,12 +10,15 @@ export class Pedido {
     id?:number
 
     @Property()
-    monto!: number
-
-    @Property()
     fecha!: Date
 
-    //@Property()
-    //usuario!: 
+    @Property()
+    monto!: number
 
+
+    @ManyToOne(() => Usuario,{fieldName: 'id_usuario' })
+    usuario!: Usuario;
+
+    @OneToMany(() => DetallePedido, detallePedido => detallePedido.pedido)
+    detalles = new Collection<DetallePedido>(this);
 }

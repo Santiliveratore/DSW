@@ -1,22 +1,22 @@
 ### obtener todos los detalle_pedidos
-GET http://localhost:3000/api/detalle_pedidos
+GET http://localhost:3000/api/detallePedidos
 
 
 ### obtener un detalle_pedido
 
  @id=2
-GET http://localhost:3000/api/detalle_pedidos/{{id}}
+GET http://localhost:3000/api/detallePedidos/{{id}}
 
 
 ### crear nuevo detalle_pedido
 
-POST http://localhost:3000/api/detalle_pedidos
+POST http://localhost:3000/api/detallePedidos
 Content-Type: application/json
 
 
 ### modificar un detalle_pedido
 
-PUT http://localhost:3000/api/detalle_pedidos/{{id}}
+PUT http://localhost:3000/api/detallePedidos/{{id}}
 Content-Type: application/json
 
 ### borrar un detalle_pedido
@@ -24,4 +24,4 @@ Content-Type: application/json
 ### cambiar el id que se quiere eliminar
  @id_eliminar=7
 
-DELETE http://localhost:3000/api/detalle_pedidos/{{id_eliminar}}
+DELETE http://localhost:3000/api/detallePedidos/{{id_eliminar}}

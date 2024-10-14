@@ -1,10 +1,11 @@
 import { Router } from 'express'
-import { findAll,findOne,add,update,remove } from './pedido.controller.js'
+import { findAll,add,update,remove,findOne, findAllById } from './pedido.controller.js'
 
 export const pedidoRouter = Router()
 
 pedidoRouter.get('/', findAll)
+pedidoRouter.get('/filtrar/:id', findAllById)
 pedidoRouter.get('/:id', findOne)
-pedidoRouter.post('/', add)
 pedidoRouter.put('/:id', update)
 pedidoRouter.delete('/:id', remove)
+pedidoRouter.post('/', add)
