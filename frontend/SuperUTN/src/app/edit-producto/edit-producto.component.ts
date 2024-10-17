@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CatalogoService } from '../catalogo.service';
 import {FormGroup,FormControl,ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-producto',
@@ -24,7 +25,7 @@ export class EditProductoComponent implements OnInit{
     foto: new FormControl('')
   });
 
-  constructor(private catalogoService:CatalogoService,private route: ActivatedRoute) { }
+  constructor(private catalogoService:CatalogoService,private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit(): void {
     // Recuperar el parámetro 'id' de la ruta
@@ -71,6 +72,7 @@ export class EditProductoComponent implements OnInit{
         this.catalogoService.editProducto(this.id,this.productoForm,this.selectedFile).subscribe(
           (response) => {
             console.log('Producto actualizado:', response);
+            this.router.navigate(['']);
           },
           (error) => {
             console.error('Error al actualizar el producto:', error);
