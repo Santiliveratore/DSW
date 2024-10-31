@@ -66,4 +66,5 @@ export class CatalogoService {
       
       return this.http.put<any>(`${this.url}/${id}`, formData);
     };
+
 }

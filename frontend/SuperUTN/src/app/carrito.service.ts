@@ -70,4 +70,16 @@ export class CarritoService {
   obtenerPedidosPorUsuario(usuarioId: number): Observable<any> {
     return this.http.get(`${this.url}/filtrar/${usuarioId}`);
   }
+
+  obtenerPedidos(): Observable<any> {
+    return this.http.get<any>(this.url);
+  }
+
+  marcarComoEntregado(pedidoId: number) : Observable<any>{
+    return this.http.put<any>(`${this.url}/${pedidoId}`, { estado: 'Entregado' });
+  }
+
+  eliminarPedido(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
 }

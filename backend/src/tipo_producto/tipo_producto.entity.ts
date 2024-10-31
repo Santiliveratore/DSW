@@ -1,4 +1,5 @@
-import { Entity,PrimaryKey,Property } from "@mikro-orm/core"
+import { Entity,PrimaryKey,Property,OneToMany,Collection } from "@mikro-orm/core"
+import { Producto } from "../producto/producto.entity.js";
 
 
 @Entity()
@@ -9,5 +10,8 @@ export class Tipo_producto {
 
     @Property()
     descripcion!: string
+
+    @OneToMany(() => Producto, producto => producto.tipo)
+    productos = new Collection<Producto>(this);
     
 }

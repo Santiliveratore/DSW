@@ -25,6 +25,7 @@ async function add(req: Request, res: Response) {
     const pedido = new Pedido();
     pedido.usuario = usuario;
     pedido.fecha = new Date();
+    pedido.estado = 'Pendiente';
     pedido.monto = 0; // Inicializamos el monto en 0
 
     // Insertar el pedido
@@ -75,20 +76,20 @@ async function add(req: Request, res: Response) {
 
 
 async function findAll(req: Request, res: Response) {
-  try{
-    const pedido = await em.find(Pedido,{})
-    res.status(200).json({message:'find all pedidos', data:pedido})
-
-  } catch(error:any){
-    res.status(500).json({message:error.message})
+  try {
+    const pedidos = await em.find(Pedido, {}, { orderBy: { fecha: 'DESC' },populate: ['detalles.producto'] });
+    res.status(200).json({ message: 'find all pedidos', data: pedidos });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 }
+
 
 async function findAllById(req: Request, res: Response) {
   const usuarioId = Number(req.params.id); // Asegúrate de que sea un número
 
   try {
-    const pedidos = await em.find(Pedido, { usuario: { id: usuarioId } }, { populate: ['detalles.producto'] });
+    const pedidos = await em.find(Pedido, { usuario: { id: usuarioId } }, { orderBy: { fecha: 'DESC' },populate: ['detalles.producto'] });
     res.status(200).json(pedidos);
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener los pedidos', error });

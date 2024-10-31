@@ -8,6 +8,7 @@ import { EditProductoComponent } from './edit-producto/edit-producto.component';
 import { authGuard,notAuthGuard,authAdminGuard } from './guards/auth.guard';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { PedidosAdminComponent } from './pedidos-admin/pedidos-admin.component';
 
 export const routes: Routes = [
     {path:'',component:CatalogoComponent},
@@ -15,7 +16,8 @@ export const routes: Routes = [
     {path:'signUp',component:SignUpComponent,canActivate:[notAuthGuard]},
     {path:'addProducto',component:AddProductoComponent,canActivate:[authAdminGuard]},
     {path:'addCategoria',component:AddCategoriaComponent,canActivate:[authAdminGuard]},
-    {path:'editProducto/:id',component:EditProductoComponent},
+    {path:'editProducto/:id',component:EditProductoComponent,canActivate:[authAdminGuard]},
     {path:'carrito',component:CarritoComponent},
-    {path:'pedidos',component:PedidosComponent}
+    {path:'pedidos',component:PedidosComponent},
+    {path:'pedidosAdmin',component:PedidosAdminComponent,canActivate:[authAdminGuard]}
 ];

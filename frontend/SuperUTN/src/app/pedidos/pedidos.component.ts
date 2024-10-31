@@ -34,4 +34,16 @@ export class PedidosComponent implements OnInit {
     }
   }
 
+  eliminarPedido(id: number) {
+    this.pedidoService.eliminarPedido(id).subscribe(
+      () => {
+        // Filtramos el pedido eliminado de la lista de pedidos en el frontend
+        this.pedidos = this.pedidos.filter((pedido) => pedido.id !== id);
+      },
+      (error) => {
+        console.error('Error al eliminar el pedido:', error);
+      }
+    );
+  }
+
 }
