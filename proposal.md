@@ -16,10 +16,8 @@
 *El negocio en desarrollo es un sistema para un supermercado que optimiza la gestión de productos, pedidos y el proceso de compra en línea, con funcionalidades específicas para un carrito de compras que permite a los clientes seleccionar y gestionar sus productos antes de finalizar su pedido. Esto facilita tanto la administración de inventarios como una experiencia de compra fluida y conveniente para los usuarios.*
 
 ### Modelo
-![imagen del modelo]()
-
-*Nota*: incluir un link con la imagen de un modelo, puede ser modelo de dominio, diagrama de clases, DER. Si lo prefieren pueden utilizar diagramas con [Mermaid](https://mermaid.js.org) en lugar de imágenes.
-
+![image](https://github.com/user-attachments/assets/60098e8b-7ec1-4de1-b33b-98bde8469f60)
+[modelo](https://app.diagrams.net/#G1TE1EC8v8QFoUyhFviPTrR1zm7HeTCuG-#%7B%22pageId%22%3A%22U28X3VXMP11n0eu1sQdl%22%7D)
 ## Alcance Funcional 
 
 ### 1. Gestión de productos
