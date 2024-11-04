@@ -11,9 +11,9 @@
 * [backend app](https://github.com/Santiliveratore/DSW/tree/main/backend)
 
 
-## Tema
+## Tema Supermercado Web
 ### Descripción
-*2 a 6 líneas describiendo el negocio (menos es más)*
+*El negocio en desarrollo es un sistema para un supermercado que optimiza la gestión de productos, pedidos y el proceso de compra en línea, con funcionalidades específicas para un carrito de compras que permite a los clientes seleccionar y gestionar sus productos antes de finalizar su pedido. Esto facilita tanto la administración de inventarios como una experiencia de compra fluida y conveniente para los usuarios.*
 
 ### Modelo
 ![imagen del modelo]()
@@ -22,14 +22,34 @@
 
 ## Alcance Funcional 
 
-### Alcance Mínimo
+### 1. Gestión de productos
+El administrador puede:
+- Agregar, editar y eliminar productos.
+- Organizar productos en categorías y tipos para mejorar la estructura y la facilidad de búsqueda.
 
-*Nota*: el siguiente es un ejemplo para un grupo de 3 integrantes para un sistema de hotel. El 
+### 2. Carrito de compras
+Los clientes pueden:
+- Agregar productos al carrito de compras.
+- Ver el total de la compra.
+- Ajustar la cantidad de cada producto antes de finalizar el pedido.
 
-Regularidad:
+### 3. Gestión de pedidos
+Los clientes pueden:
+- Crear y revisar sus pedidos.
+- Eliminar pedidos antes de su procesamiento.
+  
+El administrador puede:
+- Acceder a todos los pedidos realizados.
+- Actualizar el estado de los pedidos para facilitar el seguimiento y control.
+
+### 4. Interfaz de usuario
+El sistema cuenta con:
+- Una interfaz para los administradores, enfocada en la gestión de productos, categorías y pedidos.
+- Una interfaz para los clientes, orientada a la navegación, selección de productos y gestión del carrito de compras.
+
+
 |Req|Detalle|
 |:-|:-|
-|CRUD simple|1. CRUD Tipo Habitacion<br>2. CRUD Servicio<br>3. CRUD Localidad|
-|CRUD dependiente|1. CRUD Habitación {depende de} CRUD Tipo Habitacion<br>2. CRUD Cliente {depende de} CRUD Localidad|
-|Listado<br>+<br>detalle| 1. Listado de habitaciones filtrado por tipo de habitación, muestra nro y tipo de habitación => detalle CRUD Habitacion<br> 2. Listado de reservas filtrado por rango de fecha, muestra nro de habitación, fecha inicio y fin estadía, estado y nombre del cliente => detalle muestra datos completos de la reserva y del cliente|
-|CUU/Epic|1. Reservar una habitación para la estadía<br>2. Realizar el check-in de una reserva|
+|CRUD simple|1. CRUD Tipo Producto<br>2. CRUD Categoria<br>3. CRUD Localidad|
+|CRUD dependiente|1. CRUD Producto {depende de} CRUD Tipo Producto y Categoria<br>2. CRUD Usuario {depende de} CRUD Localidad|
+|CUU/Epic|1. Realizar un pedido con su lista de productos<br>2. Admin marca los pedidos como entregados<br>3. Cliente cancela sus pedidos
