@@ -56,14 +56,14 @@ async function add(req: Request, res: Response) {
 
 
 async function update(req: Request, res: Response) {
-  const em = orm.em.fork(); // Clonamos el EntityManager para este contexto
+  const em = orm.em.fork(); // Clonamos el EntityManager para este contexto hice esto porque me daba un error
   try {
     const id = Number.parseInt(req.params.id);
-    const producto = await em.findOneOrFail(Producto, id); // Usamos findOneOrFail para obtener el producto
+    const producto = await em.findOneOrFail(Producto, id);
 
     // Si se envía una nueva foto, manejamos la eliminación de la antigua
     if (req.file) {
-      const oldFoto = producto.foto; // Suponiendo que 'foto' tiene el nombre del archivo
+      const oldFoto = producto.foto; 
 
       em.assign(producto, req.body);
       producto.foto = req.file.filename; // Actualizamos la foto con la nueva
@@ -109,7 +109,6 @@ async function remove(req: Request, res: Response) {
     fs.unlink(imagePath, (err) => {
       if (err) {
         console.error('Error al eliminar la imagen:', err);
-        // Puedes manejar el error aquí si es necesario
       } else {
         console.log('Imagen eliminada:', producto.foto);
       }

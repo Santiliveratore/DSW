@@ -26,12 +26,11 @@ async function add(req: Request, res: Response) {
     pedido.usuario = usuario;
     pedido.fecha = new Date();
     pedido.estado = 'Pendiente';
-    pedido.monto = 0; // Inicializamos el monto en 0
+    pedido.monto = 0; 
 
     // Insertar el pedido
     await em.persist(pedido);
 
-    // Inicializar el monto total
     let montoTotal = 0;
 
     // Crear las líneas de pedido y calcular el monto total
@@ -51,8 +50,6 @@ async function add(req: Request, res: Response) {
       // Calcular el subtotal para esta línea
       const subtotalLinea = producto.precio * linea.cantidad;
       montoTotal += subtotalLinea; // Sumar el subtotal al monto total
-
-      // Agregar la línea al pedido sin hacer flush aún
       em.persist(nuevoDetalle);
     }
 

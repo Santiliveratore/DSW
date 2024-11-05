@@ -37,7 +37,7 @@ export class PedidosComponent implements OnInit {
   eliminarPedido(id: number) {
     this.pedidoService.eliminarPedido(id).subscribe(
       () => {
-        // Filtramos el pedido eliminado de la lista de pedidos en el frontend
+        // Filtramos el pedido eliminado de la lista de pedidos 
         this.pedidos = this.pedidos.filter((pedido) => pedido.id !== id);
       },
       (error) => {

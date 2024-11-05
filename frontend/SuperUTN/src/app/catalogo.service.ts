@@ -22,6 +22,7 @@ export class CatalogoService {
     }
 
     getCategorias(){return this.http.get<any>('http://localhost:3000/api/categorias')}
+    getTipos(){return this.http.get<any>('http://localhost:3000/api/tipo_productos')}
 
  
     eliminarProducto(id:string,foto:string): Observable<any>{
@@ -38,6 +39,7 @@ export class CatalogoService {
       formData.append('descripcion', producto.descripcion);
       formData.append('precio', producto.precio.toString());
       formData.append('categoria', producto.categoria.toString());
+      formData.append('tipo', producto.tipo.toString());
       formData.append('foto', im); // Agrega la imagen al FormData
       return this.http.post(this.url, formData);
     }
@@ -45,6 +47,7 @@ export class CatalogoService {
     crearCategoria(categoria:any):Observable<any>{
         return this.http.post('http://localhost:3000/api/categorias', categoria);
     };
+    
 
     getProducto(id: number): Observable<any> {
       return this.http.get<any>(`${this.url}/${id}`);
@@ -57,9 +60,6 @@ export class CatalogoService {
       // Agregar los datos del producto al FormData
       formData.append('nombre', producto.value.nombre);
       formData.append('descripcion',producto.value.descripcion);
-      if (producto.value.precio !== undefined && producto.value.precio !== null) {
-        formData.append('precio', producto.value.precio.toString());
-      }
       if (im!=null) {
         formData.append('foto', im);
       }

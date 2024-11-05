@@ -15,13 +15,15 @@ export class AddProductoComponent implements OnInit{
   selectedImage: File | null = null; // Imagen seleccionada
   imagePreview: string | ArrayBuffer | null = ''; // Vista previa de la imagen
   categorias:any=[]=[];
+  tipos:any=[]=[];
 
   productoForm = new FormGroup({
     nombre: new FormControl('',Validators.required),
     descripcion: new FormControl('',Validators.required),
     precio: new FormControl('',Validators.required),
     foto: new FormControl('',Validators.required),
-    categoria: new FormControl('',Validators.required)
+    categoria: new FormControl('',Validators.required),
+    tipo: new FormControl('',Validators.required)
   });
   errorMessage: string | null = null;
 
@@ -29,7 +31,10 @@ export class AddProductoComponent implements OnInit{
     private router: Router){};
 
   ngOnInit(): void {
+    this.catalogoService.getTipos().subscribe(response=>this.tipos=response.data)
     this.catalogoService.getCategorias().subscribe(response=>this.categorias=response.data)
+    
+    console.log(this.tipos);
   }
 
   onFileSelected(event: Event): void {

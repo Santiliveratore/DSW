@@ -35,9 +35,9 @@ export class CarritoComponent implements OnInit {
   calcularTotal(): number {
     let total = 0;
   
-    // Recorremos el carrito y sumamos el precio por la cantidad
+    // Recorre el carrito y sumamos el precio por la cantidad
     this.carrito.forEach(item => {
-     total += item.producto.precio * item.cantidad; // Multiplica el precio del producto por la cantidad
+     total += item.producto.precio * item.cantidad; 
     });
   
     return total;

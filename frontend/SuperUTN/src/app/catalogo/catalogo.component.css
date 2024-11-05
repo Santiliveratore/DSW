@@ -1,12 +1,62 @@
-nav{
-    background-color: #e9ecef;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-around;
+
+.categorias-nav {
+  background-color: #e9ecef;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.categorias-nav a.active {
+  color: #3d77f3; 
+  font-weight: bold;
+  border-bottom: 2px solid #3d77f3; 
+}
+
+/* Oculta el botón desplegable en pantallas grandes */
+.dropdown-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* Estilos para pantallas móviles */
+@media (max-width: 1024px) {
+  .categorias-nav {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  a.active {
-    color: #3d77f3; 
-    font-weight: bold;
-    border-bottom: 2px solid #3d77f3; 
+  .dropdown-btn {
+    display: block;
   }
+
+  .dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .dropdown-menu.open {
+    max-height: 300px;
+    opacity: 1;
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+    color: #333;
+    text-align: left;
+    width: 100%;
+  }
+}
+

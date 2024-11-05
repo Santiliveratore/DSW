@@ -5,6 +5,7 @@ import { SqlHighlighter } from "@mikro-orm/sql-highlighter";
 export const orm = await MikroORM.init({
     entities:['dist/**/*.entity.js'],
     entitiesTs:['src/**/*.entity.ts'],
+    allowGlobalContext: true,
     dbName:'superutn',
     host:'localhost',
     user:'root',

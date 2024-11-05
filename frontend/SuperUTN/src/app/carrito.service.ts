@@ -54,7 +54,6 @@ export class CarritoService {
   }
 
   crearPedido(lineas: any[], usuarioId: number): Observable<any> {
-    // Construir el cuerpo de la solicitud con las líneas del pedido y el ID del usuario
     const body = {
       lineas: lineas.map(linea => ({
         productoId: linea.producto.id,
@@ -62,8 +61,6 @@ export class CarritoService {
       })),
       usuarioId: usuarioId
     };
-
-    // Enviar el POST al endpoint de crear pedido
     return this.http.post(this.url, body);
   }
 

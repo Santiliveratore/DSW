@@ -82,7 +82,7 @@ async function login(req: Request, res: Response) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
-    // Comparar la contraseña ingresada con la almacenada en la base de datos. Cambiarlo por hash en otro momento
+    // Comparar la contraseña ingresada con la almacenada en la base de datos.
     const contraseñaValida = contraseña === usuario.contraseña;
 
 
@@ -92,7 +92,7 @@ async function login(req: Request, res: Response) {
 
     // Generar un token de autenticación (JWT)
     const token = jwt.sign(
-      { id: usuario.id,email: usuario.email, nombre: usuario.nombre ,apellido: usuario.apellido ,rol: usuario.rol,localidad: usuario.localidad },  // Datos que quieres incluir en el token
+      { id: usuario.id,email: usuario.email, nombre: usuario.nombre ,apellido: usuario.apellido ,rol: usuario.rol,localidad: usuario.localidad }, 
       'clave_secreta',  // Usa una clave secreta fuerte en producción
       { expiresIn: '1h' }  // El token expira en 1 hora
     );

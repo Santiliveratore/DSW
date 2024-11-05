@@ -17,6 +17,7 @@ export class CatalogoComponent implements OnInit  {
   categorias:any=[]=[];
   usuario: any = null;
   selectedCategory: string = 'Todo';
+  dropdownOpen: boolean = false;
 
   constructor(private service:CatalogoService,private usuarioService: UsuarioService,private carritoService: CarritoService){}
 
@@ -39,6 +40,10 @@ export class CatalogoComponent implements OnInit  {
   isAdmin(): boolean|null {
     return this.usuarioService.isAdmin();
   }
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+  
   getProductos(){
     this.selectedCategory = 'Todo';
     this.service.getProductos().subscribe(response=>this.productos=response.data)};
@@ -52,7 +57,6 @@ export class CatalogoComponent implements OnInit  {
   }
 
   eliminarProducto(productoId: string,fotoUrl:string): void {
-    // Mostrar alerta de confirmación
     const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
   
     if (confirmacion) {

@@ -21,7 +21,6 @@ export class EditProductoComponent implements OnInit{
   productoForm = new FormGroup({
     nombre: new FormControl(''),
     descripcion: new FormControl(''),
-    precio: new FormControl(),
     foto: new FormControl('')
   });
 
@@ -37,12 +36,9 @@ export class EditProductoComponent implements OnInit{
       if (this.id) {
         this.catalogoService.getProducto(this.id).subscribe(response => {
           this.producto = response.data;
-          // Si ya tienes un formulario, puedes setear los valores aquí
           this.productoForm.patchValue({
             nombre: this.producto.nombre,
             descripcion: this.producto.descripcion,
-            precio: Number(this.producto.precio),
-            // No llenes el campo foto a menos que quieras mostrar la ruta
           });
         }, error => {
           console.error('Error al recuperar el producto:', error);

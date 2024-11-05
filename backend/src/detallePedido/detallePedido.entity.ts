@@ -21,7 +21,7 @@ export class DetallePedido {
     pedido!: any;
     
 }
-// Después del bloque de código, carga la clase
+// Después del bloque de código, carga la clase, hice esto porque me daba un error que no lo pude solucionar de ninguna forma
 import('../pedido/pedido.entity.js').then(mod => {
     PedidoClass = mod.Pedido;
 });
