@@ -99,4 +99,14 @@ nav a:hover{
   .admin-badge { /* Badge de Admin */
     display: none;
   }
+  .auth-buttons {
+    flex-direction: column; /* Coloca los botones en columna en pantallas pequeñas */
+    gap: 5px; /* Reduce el espacio entre botones */
+  }
+
+  .auth-buttons button {
+    font-size: 0.9rem; /* Reduce ligeramente el tamaño de fuente */
+    padding: 6px 12px; /* Ajusta el relleno para adaptarse mejor a pantallas pequeñas */
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+  }
 }

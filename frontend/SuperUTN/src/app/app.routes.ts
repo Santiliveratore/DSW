@@ -17,7 +17,7 @@ export const routes: Routes = [
     {path:'addProducto',component:AddProductoComponent,canActivate:[authAdminGuard]},
     {path:'addCategoria',component:AddCategoriaComponent,canActivate:[authAdminGuard]},
     {path:'editProducto/:id',component:EditProductoComponent,canActivate:[authAdminGuard]},
-    {path:'carrito',component:CarritoComponent},
-    {path:'pedidos',component:PedidosComponent},
+    {path:'carrito',component:CarritoComponent,canActivate:[authGuard]},
+    {path:'pedidos',component:PedidosComponent,canActivate:[authGuard]},
     {path:'pedidosAdmin',component:PedidosAdminComponent,canActivate:[authAdminGuard]}
 ];
