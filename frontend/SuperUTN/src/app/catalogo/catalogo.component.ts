@@ -73,7 +73,9 @@ export class CatalogoComponent implements OnInit  {
       });
     }
   }
-
+  obtenerCantidadProductoEnCarrito(productoId: string): number {
+    return this.carritoService.obtenerCantidadProducto(productoId);
+  }
   
   agregarAlCarrito(producto: any, cantidad: number) {
     this.carritoService.agregarAlCarrito(producto, cantidad);

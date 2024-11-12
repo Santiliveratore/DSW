@@ -13,6 +13,7 @@ import { UsuarioService } from '../usuario.service';
 export class CarritoComponent implements OnInit {
   carrito: any[] = [];
   usuario:any;
+  mensaje:any;
 
   constructor(private carritoService: CarritoService,private usuarioService: UsuarioService) {}
 
@@ -43,16 +44,17 @@ export class CarritoComponent implements OnInit {
     return total;
   }
 
+  
   realizarPedido() {
     if (!this.usuario) {
-      alert('Usuario no autenticado');
+      this.mostrarMensaje('Usuario no autenticado', 'error');
       return;
     }
     // Llamar al método del servicio para realizar el pedido
     this.carritoService.crearPedido(this.carrito,this.usuario.id).subscribe({
       next: (response) => {
         console.log('Pedido realizado exitosamente:', response);
-        alert('Pedido realizado con éxito');
+        this.mostrarMensaje('Pedido realizado con éxito', 'success');
         this.limpiarCarrito(); // Limpiar el carrito después de realizar el pedido
       },
       error: (error) => {
@@ -60,5 +62,12 @@ export class CarritoComponent implements OnInit {
         alert('Error al realizar el pedido, intenta nuevamente.');
       }
     });
+  }
+
+  mostrarMensaje(mensaje: string, tipo: 'success' | 'error') {
+    this.mensaje = { texto: mensaje, tipo: tipo };
+    setTimeout(() => {
+      this.mensaje = null; // Ocultar el mensaje después de unos segundos
+    }, 3000);
   }
 }

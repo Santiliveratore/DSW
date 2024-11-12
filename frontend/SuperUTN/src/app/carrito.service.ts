@@ -18,6 +18,14 @@ export class CarritoService {
     return carrito ? JSON.parse(carrito) : [];
   }
 
+  obtenerCantidadProducto(productoId: string): number {
+    const carrito = this.obtenerCarrito();
+    const linea = carrito.find((item: any) => item.producto.id === productoId);
+    return linea ? linea.cantidad : 0;
+  }
+
+ 
+
   // Guardar el carrito en localStorage
   guardarCarrito(carrito: any[]) {
     localStorage.setItem(this.storageKey, JSON.stringify(carrito));

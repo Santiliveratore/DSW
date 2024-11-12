@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit{
 
   usuario: any = null;
   dropdownOpen = false; //menu desplegable
+  
 
   constructor(private usuarioService: UsuarioService, private router: Router,private carritoService: CarritoService) {}
 
@@ -28,7 +29,11 @@ export class HeaderComponent implements OnInit{
     });
     // Comprobamos si ya existe un usuario logueado al cargar el componente
     this.usuario = this.usuarioService.getUsuarioActual();
+
+   
   }
+
+ 
 
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen; // activar/desactivar menu desplegable

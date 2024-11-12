@@ -13,7 +13,7 @@
   border-bottom: 2px solid #3d77f3; 
 }
 
-/* Oculta el botón desplegable en pantallas grandes */
+
 .dropdown-btn {
   padding: 10px 20px;
   background-color: #007bff;
@@ -24,8 +24,24 @@
   cursor: pointer;
   display: none;
 }
+.cantidad-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #1a5bff; 
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
 
-/* Estilos para pantallas móviles */
+
 @media (max-width: 1024px) {
   .categorias-nav {
     flex-direction: column;
@@ -58,5 +74,6 @@
     text-align: left;
     width: 100%;
   }
+
 }
 
