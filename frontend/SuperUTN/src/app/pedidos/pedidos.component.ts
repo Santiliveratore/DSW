@@ -35,15 +35,22 @@ export class PedidosComponent implements OnInit {
   }
 
   eliminarPedido(id: number) {
-    this.pedidoService.eliminarPedido(id).subscribe(
-      () => {
-        // Filtramos el pedido eliminado de la lista de pedidos 
-        this.pedidos = this.pedidos.filter((pedido) => pedido.id !== id);
-      },
-      (error) => {
-        console.error('Error al eliminar el pedido:', error);
-      }
-    );
+    const confirmacion = confirm('¿Estás seguro de que deseas eliminar este pedido? Esta acción no se puede deshacer.');
+  
+    if (confirmacion) {
+      this.pedidoService.eliminarPedido(id).subscribe(
+        () => {
+          // Filtramos el pedido eliminado de la lista de pedidos
+          this.pedidos = this.pedidos.filter((pedido) => pedido.id !== id);
+          alert('Pedido eliminado con éxito.');
+        },
+        (error) => {
+          console.error('Error al eliminar el pedido:', error);
+          alert('Ocurrió un error al intentar eliminar el pedido. Intenta nuevamente.');
+        }
+      );
+    }
   }
+  
 
 }

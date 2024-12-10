@@ -70,4 +70,25 @@ export class CarritoComponent implements OnInit {
       this.mensaje = null; // Ocultar el mensaje después de unos segundos
     }, 3000);
   }
+
+   // Incrementar la cantidad de un producto
+   incrementarCantidad(productoId: string) {
+    const producto = this.carrito.find((item) => item.producto.id === productoId);
+    if (producto) {
+      this.carritoService.agregarAlCarrito(producto.producto, 1);
+      this.carrito = this.carritoService.obtenerCarrito(); // Reflejar cambios en el carrito
+    }
+  }
+
+  // Decrementar la cantidad de un producto
+  decrementarCantidad(productoId: string) {
+    const producto = this.carrito.find((item) => item.producto.id === productoId);
+    if (producto && producto.cantidad > 1) {
+      producto.cantidad -= 1; // Reducir cantidad
+      this.carritoService.guardarCarrito(this.carrito); // Guardar cambios en localStorage
+    } else if (producto && producto.cantidad === 1) {
+      this.eliminarDelCarrito(productoId); // Si llega a 1, eliminar del carrito
+    }
+    this.carrito = this.carritoService.obtenerCarrito(); // Reflejar cambios en el carrito
+  }
 }

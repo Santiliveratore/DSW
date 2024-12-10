@@ -97,18 +97,18 @@ nav a:hover{
 }
 
 @media (max-width: 768px) {
-  .user-info b, /* Mensaje de bienvenida */
-  .admin-badge { /* Badge de Admin */
+  .user-info b, 
+  .admin-badge { 
     display: none;
   }
   .auth-buttons {
-    flex-direction: column; /* Coloca los botones en columna en pantallas pequeñas */
-    gap: 5px; /* Reduce el espacio entre botones */
+    flex-direction: column; 
+    gap: 5px; 
   }
 
   .auth-buttons button {
-    font-size: 0.9rem; /* Reduce ligeramente el tamaño de fuente */
-    padding: 6px 12px; /* Ajusta el relleno para adaptarse mejor a pantallas pequeñas */
-    width: 100%; /* Ocupa todo el ancho del contenedor */
+    font-size: 0.9rem; 
+    padding: 6px 12px; 
+    width: 100%; 
   }
 }
