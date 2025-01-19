@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { orm } from '../shared/db/orm.js'
+import bcrypt from 'bcrypt';
 import { Usuario } from './usuario.entity.js'
 import jwt from 'jsonwebtoken';
 
@@ -25,9 +26,10 @@ async function findOne(req: Request, res: Response) {
   }
 }
 
+// Método para agregar un usuario
 async function add(req: Request, res: Response) {
   try {
-    const { email } = req.body;
+    const { email, contraseña, ...resto } = req.body;
 
     // Verificar si el email ya está en uso
     const usuarioExistente = await em.findOne(Usuario, { email });
@@ -36,16 +38,21 @@ async function add(req: Request, res: Response) {
       return res.status(400).json({ message: 'El correo electrónico ya está en uso' });
     }
 
-    // Crear el nuevo usuario si el email no está en uso
-    const usuario = em.create(Usuario, req.body);
+    // Hashear la contraseña antes de guardarla
+    const saltRounds = 10; // Número de rondas para generar el salt
+    const contraseñaHasheada = await bcrypt.hash(contraseña, saltRounds);
+
+    // Crear el nuevo usuario con la contraseña hasheada
+    const usuario = em.create(Usuario, { ...resto, email, contraseña: contraseñaHasheada });
     await em.flush();
 
-    res.status(201).json({ message: 'Usuario creado', data: usuario });
+    res.status(201).json({ message: 'Usuario creado', data: { id: usuario.id, email: usuario.email } });
 
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 }
+
 
 
 async function update(req: Request, res: Response) {
@@ -82,9 +89,8 @@ async function login(req: Request, res: Response) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
-    // Comparar la contraseña ingresada con la almacenada en la base de datos.
-    const contraseñaValida = contraseña === usuario.contraseña;
-
+    // Comparar la contraseña ingresada con la almacenada en la base de datos (hasheada)
+    const contraseñaValida = await bcrypt.compare(contraseña, usuario.contraseña);
 
     if (!contraseñaValida) {
       return res.status(401).json({ message: 'Contraseña incorrecta' });
@@ -92,13 +98,13 @@ async function login(req: Request, res: Response) {
 
     // Generar un token de autenticación (JWT)
     const token = jwt.sign(
-      { id: usuario.id,email: usuario.email, nombre: usuario.nombre ,apellido: usuario.apellido ,rol: usuario.rol,localidad: usuario.localidad }, 
-      'clave_secreta',  // Usa una clave secreta fuerte en producción
-      { expiresIn: '1h' }  // El token expira en 1 hora
+      { id: usuario.id, email: usuario.email, nombre: usuario.nombre, apellido: usuario.apellido, rol: usuario.rol, localidad: usuario.localidad },
+      'clave_secreta', // Usa una clave secreta fuerte en producción
+      { expiresIn: '1h' } // El token expira en 1 hora
     );
 
     // Devolver el token al frontend
-    res.status(200).json({ message: 'Login exitoso', token});
+    res.status(200).json({ message: 'Login exitoso', token });
 
   } catch (error: any) {
     res.status(500).json({ message: error.message });
