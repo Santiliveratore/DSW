@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { Observable,throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { API_URL } from './config/config'; // Importa la variable global de configuración
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarritoService {
-
   private storageKey = 'carrito';
-  private url='http://localhost:3000/api/pedidos'
+  private url = `${API_URL}/api/pedidos`; // URL base para pedidos
 
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   // Obtener el carrito desde localStorage
   obtenerCarrito() {
@@ -18,13 +18,12 @@ export class CarritoService {
     return carrito ? JSON.parse(carrito) : [];
   }
 
+  // Obtener la cantidad de un producto en el carrito
   obtenerCantidadProducto(productoId: string): number {
     const carrito = this.obtenerCarrito();
     const linea = carrito.find((item: any) => item.producto.id === productoId);
     return linea ? linea.cantidad : 0;
   }
-
- 
 
   // Guardar el carrito en localStorage
   guardarCarrito(carrito: any[]) {
@@ -52,7 +51,6 @@ export class CarritoService {
   eliminarDelCarrito(productoId: string) {
     let carrito = this.obtenerCarrito();
     carrito = carrito.filter((item: any) => item.producto.id !== productoId);
-
     this.guardarCarrito(carrito);
   }
 
@@ -61,30 +59,36 @@ export class CarritoService {
     localStorage.removeItem(this.storageKey);
   }
 
+  // Crear un pedido
   crearPedido(lineas: any[], usuarioId: number): Observable<any> {
     const body = {
       lineas: lineas.map(linea => ({
         productoId: linea.producto.id,
-        cantidad: linea.cantidad
+        cantidad: linea.cantidad,
       })),
-      usuarioId: usuarioId
+      usuarioId: usuarioId,
     };
     return this.http.post(this.url, body);
   }
 
+  // Obtener pedidos por usuario
   obtenerPedidosPorUsuario(usuarioId: number): Observable<any> {
     return this.http.get(`${this.url}/filtrar/${usuarioId}`);
   }
 
+  // Obtener todos los pedidos
   obtenerPedidos(): Observable<any> {
     return this.http.get<any>(this.url);
   }
 
-  marcarComoEntregado(pedidoId: number) : Observable<any>{
+  // Marcar pedido como entregado
+  marcarComoEntregado(pedidoId: number): Observable<any> {
     return this.http.put<any>(`${this.url}/${pedidoId}`, { estado: 'Entregado' });
   }
 
+  // Eliminar un pedido
   eliminarPedido(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
 }
+
