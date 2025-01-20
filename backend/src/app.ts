@@ -7,6 +7,7 @@ import { productoRouter } from './producto/producto.routes.js'
 import { tipo_productoRouter } from './tipo_producto/tipo_producto.routes.js'
 import { categoriaRouter } from './categoria/categoria.routes.js'
 import { pedidoRouter } from './pedido/pedido.routes.js'
+import { PORT } from './config.js'
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -59,8 +60,8 @@ app.use((_, res) => {
 
 
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(path.join(__dirname, '../src/public/productos'));
-  console.log('Server runnning on http://localhost:3000/')
+  console.log('Server runnning on: ', PORT)
   
 })
