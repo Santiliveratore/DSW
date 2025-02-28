@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { findAll,findOne,add,update,remove } from './producto.controller.js'
+import { findAll,findOne,add,update,remove } from './producto.controller.js';
+import { authenticateToken,verificarAdmin } from '../auth/auth.controller.js';
 import multer from 'multer';
 import path from 'path';
 
@@ -20,6 +21,6 @@ export const productoRouter = Router()
 
 productoRouter.get('/', findAll)
 productoRouter.get('/:id', findOne)
-productoRouter.post('/',upload.single('foto'), add)
-productoRouter.put('/:id', upload.single('foto'), update)
-productoRouter.delete('/:id/:foto', remove)
+productoRouter.post('/',authenticateToken,verificarAdmin,upload.single('foto'), add)
+productoRouter.put('/:id',authenticateToken,verificarAdmin, upload.single('foto'), update)
+productoRouter.delete('/:id/:foto',authenticateToken,verificarAdmin, remove)

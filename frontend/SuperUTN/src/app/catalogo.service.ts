@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { UsuarioService } from './usuario.service';
 import { API_URL } from './config/config';// Importa la variable global de configuración
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,9 @@ export class CatalogoService {
   // Eliminar un producto (solo si el usuario es admin)
   eliminarProducto(id: string, foto: string): Observable<any> {
     if (this.usuarioService.isAdmin()) {
-      return this.http.delete(`${this.baseUrl}/${id}/${foto}`);
+      const token = this.usuarioService.getToken();
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.delete(`${this.baseUrl}/${id}/${foto}`,{headers});
     } else {
       return throwError(() => new Error('No tienes permisos para eliminar el producto.'));
     }
@@ -52,12 +55,16 @@ export class CatalogoService {
     formData.append('categoria', producto.categoria.toString());
     formData.append('tipo', producto.tipo.toString());
     formData.append('foto', im); // Agrega la imagen al FormData
-    return this.http.post(this.baseUrl, formData);
+    const token = this.usuarioService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(this.baseUrl, formData,{headers});
   }
 
   // Crear una nueva categoría
   crearCategoria(categoria: any): Observable<any> {
-    return this.http.post(this.categoriasUrl, categoria);
+    const token = this.usuarioService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(this.categoriasUrl, categoria,{headers});
   }
 
   // Obtener un producto por su ID
@@ -73,8 +80,10 @@ export class CatalogoService {
     if (im != null) {
       formData.append('foto', im);
     }
+    const token = this.usuarioService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.put<any>(`${this.baseUrl}/${id}`, formData);
+    return this.http.put<any>(`${this.baseUrl}/${id}`, formData,{headers});
   }
 }
 

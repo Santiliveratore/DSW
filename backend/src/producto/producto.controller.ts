@@ -32,16 +32,42 @@ async function findOne(req: Request, res: Response) {
 }
 
 async function add(req: Request, res: Response) {
+  const { nombre, descripcion, precio } = req.body;
+
   try {
     // Verifica si el archivo fue subido
     if (!req.file) {
       return res.status(400).json({ message: 'La imagen es requerida' });
     }
 
+    // Validar nombre
+    if (!nombre || typeof nombre !== 'string' || nombre.trim().length < 3 || nombre.trim().length > 50) {
+      return res.status(400).json({ message: 'El nombre es obligatorio y debe tener entre 3 y 50 caracteres.' });
+    }
+
+    // Validar descripción
+    if (!descripcion || typeof descripcion !== 'string' || descripcion.trim().length < 10 || descripcion.trim().length > 255) {
+      return res.status(400).json({ message: 'La descripción es obligatoria y debe tener entre 10 y 255 caracteres.' });
+    }
+
+    // Validar precio
+    if (!precio || isNaN(precio) || Number(precio) <= 0) {
+      return res.status(400).json({ message: 'El precio es obligatorio y debe ser un número mayor a 0.' });
+    }
+
+    // Verificar si ya existe un producto con el mismo nombre
+    const productoExistente = await em.findOne(Producto, { nombre });
+    if (productoExistente) {
+      return res.status(409).json({ message: 'Ya existe un producto con este nombre.' });
+    }
+
     // Crea el producto utilizando el cuerpo de la solicitud y el nombre de la imagen
     const producto = em.create(Producto, {
       ...req.body,
       foto: req.file.filename, // Guarda solo el nombre del archivo
+      nombre: nombre.trim(),
+      descripcion: descripcion.trim(),
+      precio: Number(precio),
     });
 
     await em.flush(); // Guarda el producto en la base de datos

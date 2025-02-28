@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_URL } from './config/config'; // Importa la variable global de configuración
+import { HttpHeaders } from '@angular/common/http';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ export class CarritoService {
   private storageKey = 'carrito';
   private url = `${API_URL}/api/pedidos`; // URL base para pedidos
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private UsuarioService: UsuarioService,) {}
 
   // Obtener el carrito desde localStorage
   obtenerCarrito() {
@@ -59,36 +61,57 @@ export class CarritoService {
     localStorage.removeItem(this.storageKey);
   }
 
-  // Crear un pedido
-  crearPedido(lineas: any[], usuarioId: number): Observable<any> {
-    const body = {
-      lineas: lineas.map(linea => ({
-        productoId: linea.producto.id,
-        cantidad: linea.cantidad,
-      })),
-      usuarioId: usuarioId,
-    };
-    return this.http.post(this.url, body);
-  }
+  // Crear un pedido con autenticación
+crearPedido(lineas: any[], usuarioId: number): Observable<any> {
+  const body = {
+    lineas: lineas.map(linea => ({
+      productoId: linea.producto.id,
+      cantidad: linea.cantidad,
+    })),
+    usuarioId: usuarioId,
+  };
 
-  // Obtener pedidos por usuario
-  obtenerPedidosPorUsuario(usuarioId: number): Observable<any> {
-    return this.http.get(`${this.url}/filtrar/${usuarioId}`);
-  }
+  // Obtener el token del servicio de usuario
+  const token = this.UsuarioService.getToken();
 
-  // Obtener todos los pedidos
-  obtenerPedidos(): Observable<any> {
-    return this.http.get<any>(this.url);
-  }
+
+  // Configurar los headers con el token
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return this.http.post(this.url, body, { headers });
+}
+
+  // Obtener pedidos por usuario con token en los headers
+obtenerPedidosPorUsuario(usuarioId: number): Observable<any> {
+   // Obtener el token del servicio de usuario
+  const token = this.UsuarioService.getToken();
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return this.http.get(`${this.url}/filtrar/${usuarioId}`, { headers });
+}
+
+
+ // Obtener todos los pedidos con token en los headers
+obtenerPedidos(): Observable<any> {
+  const token = this.UsuarioService.getToken();
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return this.http.get<any>(this.url, { headers });
+}
+
 
   // Marcar pedido como entregado
   marcarComoEntregado(pedidoId: number): Observable<any> {
-    return this.http.put<any>(`${this.url}/${pedidoId}`, { estado: 'Entregado' });
+    const token = this.UsuarioService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.url}/${pedidoId}`, { estado: 'Entregado' },{ headers });
   }
 
   // Eliminar un pedido
   eliminarPedido(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`);
+    const token = this.UsuarioService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<void>(`${this.url}/${id}`,{ headers });
   }
 }
 
