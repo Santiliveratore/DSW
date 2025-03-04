@@ -8,6 +8,7 @@ import { tipo_productoRouter } from './tipo_producto/tipo_producto.routes.js'
 import { categoriaRouter } from './categoria/categoria.routes.js'
 import { pedidoRouter } from './pedido/pedido.routes.js'
 import { PORT } from './config.js'
+import rateLimit from 'express-rate-limit';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -33,6 +34,8 @@ app.use((req, res, next) => {
 
 
 
+
+
 // Servir la carpeta 'public/productos' como estática
 app.use(cors()); //habilitar unas restricciones del navegador
 app.use('/productos', express.static(path.join(__dirname, '../src/public/productos')));
@@ -44,6 +47,15 @@ app.use('/productos', express.static(path.join(__dirname, '../src/public/product
 app.use((req,res,next)=>{
   RequestContext.create(orm.em, next)
 })
+
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // Máximo 100 peticiones por IP en 15 minutos
+  message: 'Demasiadas solicitudes desde esta IP, intenta más tarde.',
+});
+
+app.use(limiter);
 
 
 app.use('/api/productos',productoRouter)
