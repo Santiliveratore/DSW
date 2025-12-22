@@ -1,114 +1,38 @@
-body{
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
-header{
-  background-color: #f8f9fa;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo img{
-  height: 40px;
-  margin-right: 10px;
-}
-.logo{
-  display: flex;
-  align-items: center;
-}
-.brand-name{
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.auth-buttons{
-  display: flex;
-  gap: 10px;
-}
-.auth-buttons button{
-  padding: 8px 16px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-.auth-buttons button:hover{
-  background-color: #0056b3;
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.2s ease-out forwards;
 }
 
 
-
-nav a:hover{
-  text-decoration: underline;
-}
-
-.user-info {
+.dropdown-item {
   display: flex;
   align-items: center;
-  position: relative;
-}
-
-.dropdown {
-  position: relative;
-  cursor: pointer;
-  margin-left: 40px;
-}
-
-.dropdown i {
-  font-size: 30px;
-}
-
-.dropdown-menu {
-  display: block;
-  position: absolute;
-  top: 30px;
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 200px; 
-}
-
-.dropdown-menu a {
-  display: block;
-  padding: 10px 15px; 
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  color: #4b5563; 
   text-decoration: none;
-  color: black;
+  transition: all 0.2s;
   cursor: pointer;
 }
 
-.dropdown-menu a:hover {
-  background-color: #f0f0f0;
+.dropdown-item:hover {
+  background-color: #f3f4f6; 
+  color: #2563eb; 
+  padding-left: 20px; 
 }
 
-.admin-badge {
-  background-color: #007bff; 
-  color: white;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  margin-left: 8px;
-  font-weight: bold;
-  display: inline-block;
-}
 
-@media (max-width: 768px) {
-  .user-info b, 
-  .admin-badge { 
-    display: none;
-  }
-  .auth-buttons {
-    flex-direction: column; 
-    gap: 5px; 
-  }
-
-  .auth-buttons button {
-    font-size: 0.9rem; 
-    padding: 6px 12px; 
-    width: 100%; 
-  }
+.brand-name {
+  font-family: 'Inter', sans-serif; 
 }

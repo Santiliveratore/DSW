@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../carrito.service';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../usuario.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
 })

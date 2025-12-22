@@ -1,34 +1,96 @@
-<header class="text-gray-600 body-font relative z-10">
-  <div>
-    <a class="logo" routerLink="" ng-reflect-router-link="" href="">
-      <img src="https://www.logotypes101.com/logos/283/501E380BD95F595995F17CF495BCA882/LogoUTN_nvgsb.png" width="30%" height="3%">
-      <div class="brand-name">SuperUTN</div>
-    </a>
-  </div>
-  <div *ngIf="!isLoggedIn(); else loggedInBlock" class="auth-buttons">
-    <button><a routerLink="/logIn">Iniciar Sesión</a></button>
-    <button><a routerLink="/signUp">Registrarse</a></button>
-  </div>
-
-  <ng-template #loggedInBlock>
-    <div class="user-info">
-      <b>Bienvenido, {{ usuario?.nombre }} {{ usuario?.apellido }}</b>
-      <a *ngIf="!isAdmin()" routerLink="/carrito" class="text-gray-700 ml-14 hover:text-gray-900 transition-colors">
-        <i class="fa-solid fa-shopping-cart text-2xl"></i>
+<header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    
+    <div>
+      <a routerLink="/" class="flex items-center gap-3 group">
+        <img src="https://www.logotypes101.com/logos/283/501E380BD95F595995F17CF495BCA882/LogoUTN_nvgsb.png" 
+             class="h-10 w-auto transition-transform duration-300 group-hover:scale-105" 
+             alt="Logo UTN">
+        <div class="brand-name text-2xl font-bold tracking-tight text-gray-800 group-hover:text-blue-600 transition-colors">
+          Super<span class="text-blue-600">UTN</span>
+        </div>
       </a>
-      <span *ngIf="isAdmin()" class="admin-badge">Admin</span>
-      <div class="dropdown relative" (click)="toggleDropdown()">
-        <i class="fas fa-bars"></i> <!-- Ícono de menú -->
-        <div *ngIf="dropdownOpen" class="dropdown-menu absolute bg-white shadow-lg rounded-md mt-2 w-40 z-50">
-          <a *ngIf="isAdmin()" routerLink="/addProducto" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Agregar Producto</a>
-          <a *ngIf="isAdmin()" routerLink="/pedidosAdmin" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Ver Pedidos</a>
-          <a *ngIf="isAdmin()" routerLink="/addCategoria" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Agregar Categoria</a>
-          <a *ngIf="!isAdmin()" routerLink="/pedidos" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Mis Pedidos</a>
-          <a (click)="logOut()" class="block px-4 py-2 text-gray-700 hover:bg-gray-200 cursor-pointer">Cerrar Sesión</a>
+    </div>
+
+    <div *ngIf="!isLoggedIn(); else loggedInBlock" class="flex items-center gap-3">
+      <a routerLink="/logIn" 
+         class="text-gray-600 font-medium px-4 py-2 rounded-full hover:bg-gray-100 hover:text-blue-600 transition-all text-sm md:text-base cursor-pointer">
+         Iniciar Sesión
+      </a>
+      <a routerLink="/signUp" 
+         class="bg-blue-600 text-white font-medium px-5 py-2 rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg transform active:scale-95 transition-all text-sm md:text-base cursor-pointer">
+         Registrarse
+      </a>
+    </div>
+
+    <ng-template #loggedInBlock>
+      <div class="flex items-center gap-6">
+        
+        <a *ngIf="!isAdmin()" routerLink="/carrito" 
+           class="relative group text-gray-500 hover:text-blue-600 transition-colors cursor-pointer p-2">
+          <i class="fa-solid fa-cart-shopping text-xl md:text-2xl"></i>
+          </a>
+
+        <div class="relative flex items-center gap-3" (click)="toggleDropdown()">
+          
+          <div class="hidden md:flex flex-col items-end cursor-pointer">
+            <span class="text-xs text-gray-400 font-medium uppercase tracking-wider">Hola,</span>
+            <span class="text-sm font-bold text-gray-800 leading-tight">
+              {{ usuario?.nombre }} {{ usuario?.apellido }}
+            </span>
+          </div>
+
+          <span *ngIf="isAdmin()" 
+                class="hidden md:inline-block bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-md font-bold border border-blue-200">
+            ADMIN
+          </span>
+
+          <div class="relative cursor-pointer group">
+             <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-blue-600 text-white flex items-center justify-center shadow-md border-2 border-white ring-2 ring-transparent group-hover:ring-blue-100 transition-all">
+                <i class="fa-solid fa-user text-sm"></i>
+             </div>
+             <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 border border-gray-200 text-gray-500 text-[10px]">
+                <i class="fa-solid fa-chevron-down"></i>
+             </div>
+          </div>
+
+          <div *ngIf="dropdownOpen" 
+               class="absolute top-12 right-0 w-56 bg-white rounded-xl shadow-2xl ring-1 ring-black ring-opacity-5 py-2 transform origin-top-right transition-all animate-fade-in-down z-50">
+            
+            <div class="px-4 py-3 border-b border-gray-100 md:hidden">
+              <p class="text-sm font-medium text-gray-900">{{ usuario?.nombre }}</p>
+              <p *ngIf="isAdmin()" class="text-xs text-blue-600 font-bold mt-1">Administrador</p>
+            </div>
+
+            <div *ngIf="isAdmin()">
+              <div class="px-4 py-2 text-xs text-gray-400 font-bold uppercase tracking-wider">Gestión</div>
+              <a routerLink="/addProducto" class="dropdown-item">
+                <i class="fa-solid fa-plus w-5 text-center mr-2"></i> Agregar Producto
+              </a>
+              <a routerLink="/addCategoria" class="dropdown-item">
+                <i class="fa-solid fa-tags w-5 text-center mr-2"></i> Agregar Categoría
+              </a>
+              <a routerLink="/pedidosAdmin" class="dropdown-item">
+                <i class="fa-solid fa-clipboard-list w-5 text-center mr-2"></i> Ver Pedidos
+              </a>
+              <div class="border-t border-gray-100 my-1"></div>
+            </div>
+
+            <div *ngIf="!isAdmin()">
+              <a routerLink="/pedidos" class="dropdown-item">
+                <i class="fa-solid fa-box-open w-5 text-center mr-2"></i> Mis Pedidos
+              </a>
+            </div>
+
+            <a (click)="logOut()" class="dropdown-item text-red-600 hover:bg-red-50 hover:text-red-700">
+              <i class="fa-solid fa-right-from-bracket w-5 text-center mr-2"></i> Cerrar Sesión
+            </a>
+          </div>
+
         </div>
       </div>
-    </div>
-  </ng-template>
+    </ng-template>
+  </div>
 </header>
 
 

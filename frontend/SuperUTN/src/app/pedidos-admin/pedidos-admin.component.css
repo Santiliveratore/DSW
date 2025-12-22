@@ -1,0 +1,18 @@
+
+.min-h-screen {
+    background-color: #f9fafb; 
+}
+
+
+.grid > div {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent; 
+}
+
+
+.group:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+}

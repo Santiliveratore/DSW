@@ -1,53 +1,20 @@
-.container {
-    display: flex;
-    justify-content: center;
-  }
-  .bg-green-100 {
-    background-color: #d4edda;
-  }
-  
-  .border-green-500 {
-    border-color: #28a745;
-  }
-  
-  .text-green-700 {
-    color: #155724;
-  }
-  
-  .bg-red-100 {
-    background-color: #f8d7da;
-  }
-  
-  .border-red-500 {
-    border-color: #dc3545;
-  }
-  
-  .text-red-700 {
-    color: #721c24;
-  }
-  
-  
-  .cart-content {
-    width: 100%;
-    max-width: 40rem; 
-    background-color: #f9f9f9;
-    padding: 1rem;
-    border-radius: 10px;
-  }
-  
-  .cart-content h2 {
-    margin-bottom: 1.5rem;
-  }
-  
-  .cart-content .bg-white {
-    margin-bottom: 1rem;
-    padding: 1rem;
-  }
-  
-  
-  @media (max-width: 768px) {
-    .cart-content {
-      padding: 0.5rem; 
-    }
-  }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+
+.bg-white div[class*="border-b"] {
+  transition: background-color 0.2s ease;
+}
+
+
+section, .min-h-\[calc\(100vh-70px\)\] {
+  background-color: #f8fafc; 
+}
   

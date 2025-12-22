@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import {FormGroup,FormControl,ReactiveFormsModule, Validators } from '@angular/forms';
 import { CatalogoService } from '../catalogo.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-producto',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,],
+  imports: [ReactiveFormsModule,CommonModule,RouterLink],
   templateUrl: './add-producto.component.html',
   styleUrl: './add-producto.component.css'
 })

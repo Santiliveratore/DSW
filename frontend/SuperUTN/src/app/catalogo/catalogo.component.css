@@ -1,79 +1,39 @@
 
-.categorias-nav {
-  background-color: #e9ecef;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.categorias-nav a.active {
-  color: #3d77f3; 
-  font-weight: bold;
-  border-bottom: 2px solid #3d77f3; 
+.dropdown-menu {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }
 
 
-.dropdown-btn {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  display: none;
-}
-.cantidad-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: #1a5bff; 
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-
-@media (max-width: 1024px) {
-  .categorias-nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .dropdown-btn {
-    display: block;
-  }
-
+@media (min-width: 768px) {
   .dropdown-menu {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-    width: 100%;
-    padding-left: 10px;
-  }
-
-  .dropdown-menu.open {
-    max-height: 300px;
+    max-height: none;
     opacity: 1;
+    overflow: visible;
   }
+}
 
-  .dropdown-menu a {
-    display: block;
-    padding: 10px 0;
-    border-bottom: 1px solid #e9ecef;
-    color: #333;
-    text-align: left;
-    width: 100%;
-  }
 
+.dropdown-menu.open {
+  max-height: 400px; 
+  opacity: 1;
+}
+
+@keyframes bounce-short {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-bounce-short {
+  animation: bounce-short 0.3s ease-in-out;
+}
+
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 

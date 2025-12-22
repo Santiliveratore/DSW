@@ -1,40 +1,81 @@
-<section class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-    <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-      <h1 class="title-font font-medium text-3xl text-gray-900">SuperUTN tu supermercado de confianza!</h1>
-      <p class="leading-relaxed mt-4">Inicia sesión para acceder a las funcionalidades principales y poder hacer tus compras</p>
+<section class="min-h-[calc(100vh-70px)] bg-gradient-to-br from-blue-50 via-white to-gray-100 flex items-center justify-center py-12 px-4">
+  <div class="container mx-auto flex flex-wrap items-center max-w-5xl">
+    
+    <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-24 pr-0 mb-12 md:mb-0">
+      <h1 class="title-font font-extrabold text-4xl lg:text-5xl text-gray-900 leading-tight">
+        Bienvenido a <span class="text-blue-600 italic">SuperUTN</span>
+      </h1>
+      <p class="leading-relaxed mt-6 text-gray-600 text-lg">
+        Tu supermercado de confianza, ahora más cerca de ti. Inicia sesión para gestionar tus compras, ver pedidos y disfrutar de nuestras ofertas exclusivas.
+      </p>
+      <div class="flex gap-4 mt-8 hidden md:flex">
+        <div class="flex items-center gap-2 text-sm font-semibold text-gray-500 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+          <i class="fa-solid fa-shield-halved text-blue-500"></i> Compra Segura
+        </div>
+        <div class="flex items-center gap-2 text-sm font-semibold text-gray-500 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+          <i class="fa-solid fa-truck-fast text-blue-500"></i> Envío Rápido
+        </div>
+      </div>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-      <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Acceder</h2>
 
-      <!-- Campo Email -->
-      <div class="relative mb-4">
-        <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-        <input type="email" id="email" formControlName="email" 
-               class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-        <!-- Mostrar advertencia si el email es inválido -->
-        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500 text-sm mt-1">
-          <span *ngIf="loginForm.get('email')?.errors?.['required']">El campo email es obligatorio.</span>
-          <span *ngIf="loginForm.get('email')?.errors?.['email']">Debe ingresar un email válido.</span>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" 
+          class="lg:w-2/6 md:w-1/2 bg-white rounded-3xl p-10 flex flex-col md:ml-auto w-full shadow-2xl border border-gray-100 ring-1 ring-gray-900/5">
+      
+      <div class="mb-8">
+        <h2 class="text-gray-900 text-2xl font-bold title-font">Iniciar Sesión</h2>
+        <p class="text-gray-500 text-sm mt-2">Ingresa tus credenciales para continuar</p>
+      </div>
+
+      <div class="relative mb-6">
+        <label for="email" class="leading-7 text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Email</label>
+        <div class="relative mt-1">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <input type="email" id="email" formControlName="email" 
+                 placeholder="ejemplo@correo.com"
+                 class="w-full bg-gray-50 rounded-xl border-2 border-gray-100 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 text-base outline-none text-gray-700 py-2 pl-10 pr-3 leading-8 transition-all duration-200">
+        </div>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="flex items-center gap-1 text-red-500 text-xs mt-2 ml-1 animate-pulse">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">El email es obligatorio.</span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email']">Ingresa un formato válido.</span>
         </div>
       </div>
 
-      <!-- Campo Contraseña -->
-      <div class="relative mb-4">
-        <label for="contraseña" class="leading-7 text-sm text-gray-600">Contraseña</label>
-        <input type="password" id="contraseña" formControlName="contraseña" 
-               class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-        <!-- Mostrar advertencia si la contraseña es inválida -->
-        <div *ngIf="loginForm.get('contraseña')?.invalid && loginForm.get('contraseña')?.touched" class="text-red-500 text-sm mt-1">
-          <span *ngIf="loginForm.get('contraseña')?.errors?.['required']">El campo contraseña es obligatorio.</span>
+      <div class="relative mb-6">
+        <div class="flex justify-between items-center ml-1">
+          <label for="contraseña" class="leading-7 text-xs font-bold uppercase tracking-wider text-gray-500">Contraseña</label>
+          <a class="text-xs text-blue-600 hover:underline font-semibold cursor-pointer transition-all">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="relative mt-1">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <input type="password" id="contraseña" formControlName="contraseña" 
+                 placeholder="••••••••"
+                 class="w-full bg-gray-50 rounded-xl border-2 border-gray-100 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 text-base outline-none text-gray-700 py-2 pl-10 pr-3 leading-8 transition-all duration-200">
+        </div>
+        <div *ngIf="loginForm.get('contraseña')?.invalid && loginForm.get('contraseña')?.touched" class="flex items-center gap-1 text-red-500 text-xs mt-2 ml-1 animate-pulse">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>La contraseña es obligatoria.</span>
         </div>
       </div>
 
-      <button type="submit" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+      <button type="submit" 
+              class="text-white bg-blue-600 border-0 py-3 px-8 focus:outline-none hover:bg-blue-700 rounded-xl text-lg font-bold shadow-lg shadow-blue-200 hover:shadow-blue-300 transform active:scale-[0.98] transition-all">
         Acceder
       </button>
-      <p *ngIf="errorMessage" class="text-red-500 mt-3">{{ errorMessage }}</p>
-      <p class="text-xs text-gray-500 mt-3">¿Olvidó su contraseña?</p>
+
+      <div *ngIf="errorMessage" class="bg-red-50 text-red-600 p-3 rounded-lg mt-4 text-sm font-medium border border-red-100 flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        {{ errorMessage }}
+      </div>
+
+      <p class="text-center text-sm text-gray-500 mt-8">
+        ¿No tienes cuenta? 
+        <a routerLink="/signUp" class="text-blue-600 font-bold hover:text-blue-800 transition-colors">Regístrate gratis</a>
+      </p>
     </form>
   </div>
 </section>

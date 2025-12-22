@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormGroup,FormControl,ReactiveFormsModule, Validators } from '@angular/forms';
 import { CatalogoService } from '../catalogo.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-categoria',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,RouterLink],
   templateUrl: './add-categoria.component.html',
   styleUrl: './add-categoria.component.css'
 })

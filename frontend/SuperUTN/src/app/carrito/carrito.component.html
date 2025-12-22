@@ -1,64 +1,92 @@
-<div class="container mx-auto p-6 flex justify-center">
-  <div class="cart-content w-full max-w-lg">
-    <div *ngIf="mensaje" [ngClass]="mensaje.tipo === 'success' ? 'bg-green-100 border-green-500 text-green-700' : 'bg-red-100 border-red-500 text-red-700'" 
-         class="border-l-4 p-4 mb-4 rounded">
-      <p class="font-bold">{{ mensaje.tipo === 'success' ? '¡Éxito!' : 'Error' }}</p>
-      <p>{{ mensaje.texto }}</p>
+<div class="min-h-[calc(100vh-70px)] bg-gray-50 py-12 px-4">
+  <div class="container mx-auto max-w-3xl">
+    
+    <div *ngIf="mensaje" 
+         [ngClass]="mensaje.tipo === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'" 
+         class="flex items-center gap-3 border rounded-2xl p-4 mb-6 animate-fade-in">
+      <i [class]="mensaje.tipo === 'success' ? 'fa-solid fa-circle-check text-green-500' : 'fa-solid fa-circle-xmark text-red-500'"></i>
+      <div>
+        <p class="font-bold text-sm">{{ mensaje.tipo === 'success' ? '¡Éxito!' : 'Hubo un problema' }}</p>
+        <p class="text-sm opacity-90">{{ mensaje.texto }}</p>
+      </div>
     </div>
 
-    <!-- Si hay productos en el carrito -->
-    <div *ngIf="carrito.length > 0">
-      <h2 class="text-2xl font-semibold mb-4 text-center">Carrito de Compras</h2>
+    <div *ngIf="carrito.length > 0" class="space-y-6">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Tu Carrito</h2>
+        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          {{ carrito.length }} Productos
+        </span>
+      </div>
 
-      <div *ngFor="let item of carrito" class="bg-white shadow-[0_4px_12px_rgba(0,0,0,0.15)] rounded-lg p-4 mb-4 mt-4 flex items-center justify-between">
-        <!-- Información del producto -->
-        <div>
-          <p class="text-gray-700 font-medium">
-            Producto: <span class="text-blue-500">{{ item.producto.nombre }}</span>
-          </p>
-          <p class="text-gray-600">Unidad: <span>${{ item.producto.precio }}</span></p>
-          <p class="text-gray-600">
-            Total: <span class="font-semibold">${{ item.cantidad * item.producto.precio }}</span>
-          </p>
+      <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+        <div *ngFor="let item of carrito; let last = last" 
+             class="p-6 flex items-center justify-between transition-all hover:bg-gray-50/50"
+             [class.border-b]="!last">
+          
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center text-blue-600">
+               <i class="fa-solid fa-box text-2xl"></i>
+            </div>
+            <div>
+              <p class="text-gray-900 font-bold text-lg leading-tight">{{ item.producto.nombre }}</p>
+              <p class="text-gray-400 text-sm mt-1 italic">${{ item.producto.precio }} c/u</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-end gap-3">
+            <div class="flex items-center bg-gray-100 rounded-full p-1 border border-gray-200 shadow-inner">
+              <button (click)="decrementarCantidad(item.producto.id)" 
+                      class="w-8 h-8 flex items-center justify-center rounded-full bg-white text-gray-600 shadow-sm hover:text-red-500 transition-all active:scale-90">
+                <i class="fa-solid fa-minus text-xs"></i>
+              </button>
+              <span class="px-4 font-bold text-gray-800">{{ item.cantidad }}</span>
+              <button (click)="incrementarCantidad(item.producto.id)" 
+                      class="w-8 h-8 flex items-center justify-center rounded-full bg-white text-gray-600 shadow-sm hover:text-green-600 transition-all active:scale-90">
+                <i class="fa-solid fa-plus text-xs"></i>
+              </button>
+            </div>
+            <p class="text-gray-900 font-extrabold text-lg">
+              ${{ item.cantidad * item.producto.precio }}
+            </p>
+          </div>
         </div>
+      </div>
 
-        <!-- Botones para sumar, restar y eliminar -->
-        <div class="flex items-center space-x-2">
-          <button (click)="decrementarCantidad(item.producto.id)" 
-                  class="bg-red-500 text-white px-2 py-1 rounded shadow-md hover:bg-red-600 transition">
-            -
+      <div class="bg-white rounded-3xl p-8 shadow-xl shadow-blue-900/5 border border-gray-100 mt-8">
+        <div class="flex justify-between items-center mb-6">
+          <p class="text-gray-500 font-medium">Subtotal estimado</p>
+          <p class="text-3xl font-black text-gray-900">${{ calcularTotal() }}</p>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button (click)="realizarPedido()" 
+                  class="flex-grow bg-blue-600 hover:bg-blue-700 text-white py-4 px-8 rounded-2xl shadow-lg shadow-blue-200 font-bold text-lg flex items-center justify-center gap-3 transition-all transform active:scale-[0.98]">
+            <i class="fa-solid fa-truck-fast"></i>
+            Finalizar Compra
           </button>
-          <span class="font-semibold">{{ item.cantidad }}</span>
-          <button (click)="incrementarCantidad(item.producto.id)" 
-                  class="bg-green-500 text-white px-2 py-1 rounded shadow-md hover:bg-green-600 transition">
-            +
+          
+          <button (click)="limpiarCarrito()" 
+                  class="bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-500 py-4 px-6 rounded-2xl font-bold transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-trash-can"></i>
+            <span class="hidden sm:inline">Vaciar</span>
           </button>
         </div>
       </div>
-
-      <!-- Mostrar el total del carrito -->
-      <div class="text-left mt-4">
-        <p class="text-xl font-semibold">Total: ${{ calcularTotal() }}</p>
-      </div>
-
-      <!-- Botones de acciones -->
-      <div class="flex justify-between items-center mt-6">
-        <button (click)="realizarPedido()" 
-                class="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg focus:outline-none shadow-lg font-semibold text-lg transition-all duration-300">
-          <i class="fa-solid fa-check mr-2"></i> Realizar Pedido
-        </button>
-        <button (click)="limpiarCarrito()" 
-                class="bg-red-400 hover:bg-red-500 text-white py-1 px-3 rounded focus:outline-none shadow-md text-sm transition-all duration-300">
-          Limpiar Carrito
-        </button>
-      </div>
     </div>
 
-    <!-- Si el carrito está vacío -->
-    <div *ngIf="carrito.length === 0" class="text-center mt-16">
-      <p class="text-gray-500 text-lg">Tu carrito está vacío</p>
-      <i class="fa-solid fa-cart-arrow-down text-5xl text-gray-300 mt-4"></i>
+    <div *ngIf="carrito.length === 0" class="text-center py-20 px-4 animate-fade-in">
+      <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-xl mx-auto mb-8 border border-gray-50">
+        <i class="fa-solid fa-cart-shopping text-5xl text-gray-200"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Tu carrito está vacío</h2>
+      <p class="text-gray-500 mb-8 max-w-xs mx-auto">Parece que aún no has añadido productos. ¡Explora nuestro catálogo y encuentra las mejores ofertas!</p>
+      <a routerLink="/" 
+         class="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition-all cursor-pointer">
+        Volver a la tienda
+      </a>
     </div>
+
   </div>
 </div>
 
